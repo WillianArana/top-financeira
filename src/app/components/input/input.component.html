@@ -1,0 +1,17 @@
+<div class="form-group" [class.form-group--disabled]="!!isReadOnly">
+  <label [attr.for]="id" class="form-group__label paragraph-04">
+    {{ label }}
+  </label>
+  <div class="form-group__input-container">
+    <input
+      class="form-group__input"
+      [id]="id"
+      [type]="type"
+      [readOnly]="!!isReadOnly"
+      [placeholder]="placeholder"
+      [(value)]="value"
+      (blur)="onBlur()"
+    />
+    <div *ngIf="hasError" role="alert" class="form-group__alert-icon alert__icon--md"></div>
+  </div>
+</div>

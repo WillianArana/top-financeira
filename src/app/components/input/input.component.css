@@ -1,0 +1,64 @@
+.form-group {
+  height: 48px;
+  padding: 6px 16px 6px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--institucional-neutral-lightest);
+  background-color: var(--input-background-color);
+}
+
+.form-group__label {
+  display: block;
+  padding: 0;
+  margin: 0;
+  color: var(--color-brand-primary-medium);
+}
+
+.form-group__input-container {
+  position: relative;
+  width: 100%;
+}
+
+.form-group__input {
+  width: 100%;
+  height: 18px;
+  padding: 0px;
+  box-sizing: border-box;
+  background-color: var(--input-background-color);
+}
+
+.form-group__alert-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.form-group--disabled {
+  background-color: var(--input-disabled-background-color);
+}
+
+.form-group--disabled > .form-group__input-container > .form-group__input {
+  background-color: var(--input-disabled-background-color);
+}
+
+input:focus {
+  border-color: transparent;
+}
+
+input::placeholder {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: black;
+}
+
+input[type="text"], input[type="password"] {
+  border: none;
+  outline: none;
+  border-color: transparent;
+}

@@ -6,4 +6,13 @@
   --color-brand-primary-light: #11728B;
   --color-brand-primary-lightest: #7FABB7;
   --institucional-neutral-lightest: #EDEDED;
+
+
+/* Neutral color */
+  --color-neutral-lightest: #EDEDED;
+
+
+  /* Element color */
+  --input-background-color: #FFF;
+  --input-disabled-background-color: var(--color-neutral-lightest);
 }
