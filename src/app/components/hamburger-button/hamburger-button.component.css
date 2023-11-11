@@ -1,0 +1,38 @@
+button.hamburger {
+  position: absolute;
+  left: 22px;
+  top: 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hamburger__bar {
+  border-radius: 4px;
+  width: 30px;
+  height: 2px;
+  margin: 6px 0;
+  transition: 0.4s;
+  background-color: var(--color-neutral-white);
+}
+
+.hamburger--change > .hamburger__bar:nth-child(1) {
+  transform: translate(0, 8px) rotate(-45deg);
+}
+
+.hamburger--change > .hamburger__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger--change > .hamburger__bar:nth-child(3) {
+  transform: translate(0, -8px) rotate(45deg);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
