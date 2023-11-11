@@ -1,5 +1,10 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormBuilder,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { InputProtocol } from './input.protocol';
 import { InputType } from './input.type';
 
@@ -13,9 +18,9 @@ let innerId = 0;
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => InputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class InputComponent implements ControlValueAccessor, InputProtocol {
   @Input() id: string;
@@ -25,21 +30,21 @@ export class InputComponent implements ControlValueAccessor, InputProtocol {
   @Input() placeholder = '';
   @Input() type: InputType = 'text';
 
-  formGroup! : FormGroup;
+  formGroup!: FormGroup;
 
   private onChange: (value: string) => void = () => undefined;
   private onTouched: () => void = () => undefined;
 
   public value = '';
 
-   constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.id = this.createId();
     console.log('form builder ------------------------------------->\n', fb);
 
     this.formGroup = this.fb.group({
-       // implement the formcontrol
-    })
-   }
+      // implement the formcontrol
+    });
+  }
 
   public writeValue(value: string): void {
     this.value = value;

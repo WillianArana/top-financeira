@@ -6,11 +6,12 @@
   align-items: flex-start;
   flex-shrink: 0;
   border-radius: 8px;
-  border: 1px solid var(--institucional-neutral-lightest);
+  border: 1px solid var(--color-neutral-lightest);
   background-color: var(--input-background-color);
 }
 
 .form-group__label {
+  height: 12px;
   display: block;
   padding: 0;
   margin: 0;
@@ -54,7 +55,7 @@ input::placeholder {
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
-  color: black;
+  color: var(--color-neutral-darkest);
 }
 
 input[type="text"], input[type="password"] {

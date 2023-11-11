@@ -4,7 +4,7 @@
   </label>
   <div class="form-group__input-container">
     <input
-      class="form-group__input"
+      class="form-group__input paragraph-03"
       [id]="id"
       [type]="type"
       [readOnly]="!!isReadOnly"
@@ -12,6 +12,10 @@
       [(value)]="value"
       (blur)="onBlur()"
     />
-    <div *ngIf="hasError" role="alert" class="form-group__alert-icon alert__icon--md"></div>
+    <div
+      *ngIf="hasError"
+      role="alert"
+      class="form-group__alert-icon alert__icon--md"
+    ></div>
   </div>
 </div>
