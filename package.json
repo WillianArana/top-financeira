@@ -20,7 +20,9 @@
     "storybook": "ng run top-financeira:storybook",
     "build-storybook": "ng run top-financeira:build-storybook",
     "init-msw": "msw init src/",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "prettier --check \"src/**/*.ts\" \"src/**/*.html\"",
+    "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.html\""
   },
   "private": true,
   "dependencies": {
@@ -68,6 +70,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "msw": "^1.2.1",
     "msw-storybook-addon": "^1.10.0",
+    "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.5.2",

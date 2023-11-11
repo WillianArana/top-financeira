@@ -14,18 +14,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'top-financeira'`, () => {
+  it(`should have as navbarTitle 'Teste Técnico'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('top-financeira');
+    expect(app.title).toEqual('Teste Técnico');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'top-financeira app is running!'
+    expect(compiled.querySelector('.header__title')?.textContent).toContain(
+      fixture.componentInstance.title
     );
   });
 });

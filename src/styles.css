@@ -1,5 +1,24 @@
-@import 'styles/reset.css';
-@import 'styles/typography.css';
-@import 'styles/colors.css';
-@import 'styles/icons.css';
-/* @import 'storybook.css'; */
+@import "styles/reset.css";
+@import "styles/typography.css";
+@import "styles/colors.css";
+@import "styles/icons.css";
+
+body {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-white) 49.58%,
+    var(--color-neutral-lightest) 99.89%
+  );
+}
+
+.heading-page {
+  margin-top: 22px;
+  margin-bottom: 22px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--color-brand-primary-dark);
+}
+
