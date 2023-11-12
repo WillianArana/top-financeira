@@ -1,0 +1,112 @@
+{
+  "custormer": [
+    {
+      "id": 1,
+      "birthDate": "1979-07-03T03:00:00.000Z",
+      "cpf": "48677257900",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "arthur_theo_cavalcanti@metraseg.com.br",
+      "monthlyIncome": 1986,
+      "name": "Arthur Theo Augusto Cavalcanti"
+    },
+    {
+      "id": 2,
+      "birthDate": "1984-01-06T03:00:00.000Z",
+      "cpf": "12029358347",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "marinafatimaporto@qmagico.com.br",
+      "monthlyIncome": 2705,
+      "name": "Marina Fátima Esther Porto"
+    },
+    {
+      "id": 3,
+      "birthDate": "1977-02-01T03:00:00.000Z",
+      "cpf": "36662397067",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "thomas-dasilva79@policiapenal.com",
+      "monthlyIncome": 4415,
+      "name": "Thomas Ricardo Diego da Silva"
+    },
+    {
+      "id": 4,
+      "birthDate": "1980-08-27T03:00:00.000Z",
+      "cpf": "19084638484",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "louise_dasneves@djapan.com.br",
+      "monthlyIncome": 6869,
+      "name": "Louise Jaqueline Rita das Neves"
+    },
+    {
+      "id": 5,
+      "birthDate": "1990-09-26T03:00:00.000Z",
+      "cpf": "27528280208",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "antoniastefanygomes@infonet.com.br",
+      "monthlyIncome": 3261,
+      "name": "Antônia Stefany Gomes"
+    },
+    {
+      "id": 6,
+      "birthDate": "1986-05-22T03:00:00.000Z",
+      "cpf": "12588056938",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "renan-barros71@franciscofilho.adv.br",
+      "monthlyIncome": 1300,
+      "name": "Renan Vinicius Renan Barros"
+    },
+    {
+      "id": 7,
+      "birthDate": "1999-11-17T03:00:00.000Z",
+      "cpf": "56495400632",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "renan-barros71@franciscofilho.adv.br",
+      "monthlyIncome": 5998,
+      "name": "Kevin Yuri Paulo Cardoso"
+    },
+    {
+      "id": 8,
+      "birthDate": "1994-08-05T03:00:00.000Z",
+      "cpf": "63551572631",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "marcos_vieira@deere.com",
+      "monthlyIncome": 2261,
+      "name": "Marcos Vieira"
+    },
+    {
+      "id": 9,
+      "birthDate": "1989-12-02T03:00:00.000Z",
+      "cpf": "83056881358",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "ayla_duarte@iquattro.com.br",
+      "monthlyIncome": 3844,
+      "name": "Ayla Carla Cecília Duarte"
+    },
+    {
+      "id": 10,
+      "birthDate": "1990-04-06T03:00:00.000Z",
+      "cpf": "90179728741",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "lara-almeida98@smbcontabil.com.br",
+      "monthlyIncome": 1531,
+      "name": "Lara Bárbara Almeida"
+    },
+    {
+      "id": 11,
+      "birthDate": "1985-05-05T03:00:00.000Z",
+      "cpf": "49543521425",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "vicente-silva75@uninorte.com.br",
+      "monthlyIncome": 1881,
+      "name": "Vicente Geraldo Rodrigo Silva"
+    },
+    {
+      "id": 12,
+      "birthDate": "1996-03-03T03:00:00.000Z",
+      "cpf": "21733408088",
+      "createdAt": "2023-11-13T03:26:16.074Z",
+      "email": "raimunda-viana97@homtail.com",
+      "monthlyIncome": 5399,
+      "name": "Raimunda Viana"
+    }
+  ]
+}
