@@ -1,0 +1,45 @@
+button {
+  background-color: transparent;
+  border: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+button.button.columms {
+  width: 146px;
+}
+
+button.button[name="primary-default"] {
+  display: flex;
+  height: 40px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--color-brand-primary-dark);
+  color: var(--color-neutral-white);
+  cursor: pointer;
+}
+
+button.button[name="primary-default"]:hover {
+  background: var(--color-brand-primary-light);
+}
+
+button.button[name="primary-default"]:focus {
+  border: 2px solid var(--color-feedback-info-medium);
+  background: var(--color-brand-primary-medium);
+}
+
+button.button[name="primary-default"]:active {
+  border: none;
+  background: var(--color-brand-primary-darkest);
+}
+
+button.button:disabled {
+  pointer-events: none;
+  background: var(--color-neutral-lightest);
+  color: var(--color-neutral-medium);
+}
