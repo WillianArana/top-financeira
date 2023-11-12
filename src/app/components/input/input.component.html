@@ -5,11 +5,14 @@
   <div class="form-group__input-container">
     <input
       class="form-group__input paragraph-03"
+      #input
       [id]="id"
       [type]="type"
       [readOnly]="!!isReadOnly"
       [placeholder]="placeholder"
       [(value)]="value"
+      (keyup)="onChangeTimeout(input.value)"
+      (change)="onChangeTimeout(input.value)"
       (blur)="onBlur()"
     />
     <div

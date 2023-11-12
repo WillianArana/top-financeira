@@ -1,6 +1,6 @@
 import { InputType } from './input.type';
 
-export interface InputProtocol {
+export interface IInput {
   id: string;
   label: string;
   placeholder: string;

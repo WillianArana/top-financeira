@@ -1,11 +1,31 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Injector,
+  Input,
+  OnDestroy,
+  OnInit,
+  forwardRef,
+} from '@angular/core';
 import {
   ControlValueAccessor,
-  FormBuilder,
-  FormGroup,
+  FormControl,
+  FormControlDirective,
+  FormControlName,
+  FormControlStatus,
+  FormGroupDirective,
   NG_VALUE_ACCESSOR,
+  NgControl,
+  NgModel,
 } from '@angular/forms';
-import { InputProtocol } from './input.protocol';
+import {
+  ReplaySubject,
+  distinctUntilChanged,
+  skip,
+  takeUntil,
+  tap,
+} from 'rxjs';
+import { IInput } from './input.interface';
 import { InputType } from './input.type';
 
 let innerId = 0;
@@ -22,35 +42,89 @@ let innerId = 0;
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor, InputProtocol {
-  @Input() id: string;
+export class InputComponent
+  implements OnInit, OnDestroy, ControlValueAccessor, IInput
+{
+  @Input() id = this.createId();
   @Input() isReadOnly = false;
   @Input() hasError = false;
   @Input() label!: string;
   @Input() placeholder = '';
   @Input() type: InputType = 'text';
 
-  formGroup!: FormGroup;
+  control!: FormControl;
+  value: unknown = '';
 
-  private onChange: (value: string) => void = () => undefined;
+  private readonly destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private onChange: (value: unknown) => void = () => undefined;
   private onTouched: () => void = () => undefined;
 
-  public value = '';
+  constructor(@Inject(Injector) private injector: Injector) {}
 
-  constructor(private fb: FormBuilder) {
-    this.id = this.createId();
-    console.log('form builder ------------------------------------->\n', fb);
-
-    this.formGroup = this.fb.group({
-      // implement the formcontrol
-    });
+  public ngOnInit(): void {
+    this.setControl();
   }
 
-  public writeValue(value: string): void {
+  private setControl(): void {
+    const injectedControl = this.injector.get(NgControl);
+    const hasNotSetControl =
+      !this.setControlIfIsNgModel(injectedControl) &&
+      !this.setControlIfIsFormControlName(injectedControl);
+    if (hasNotSetControl) {
+      this.control = (injectedControl as FormControlDirective)
+        .form as FormControl;
+    }
+  }
+
+  private setControlIfIsNgModel(
+    injectedControl: NgControl | FormControlName,
+  ): injectedControl is NgControl {
+    const isNgModel = injectedControl.constructor === NgModel;
+    if (isNgModel) {
+      const { control, update } = injectedControl as NgModel;
+      this.control = control;
+      this.control.valueChanges
+        .pipe(
+          tap((value: unknown) => update.emit(value)),
+          takeUntil(this.destroyed$),
+        )
+        .subscribe();
+    }
+    return isNgModel;
+  }
+
+  private setControlIfIsFormControlName(
+    injectedControl: NgControl | FormControlName,
+  ): injectedControl is FormControlName {
+    const isFormControlName = injectedControl.constructor === FormControlName;
+    if (isFormControlName) {
+      this.control = this.injector
+        .get(FormGroupDirective)
+        .getControl(injectedControl as FormControlName);
+      this.setIsDisabled(this.control.status);
+      this.control.statusChanges
+        .pipe(distinctUntilChanged(), skip(1), takeUntil(this.destroyed$))
+        .subscribe((status) => {
+          this.setIsDisabled(status);
+          this.setIsInvalid(status);
+        });
+    }
+    return isFormControlName;
+  }
+
+  private setIsDisabled(status: FormControlStatus): void {
+    this.isReadOnly = status === 'DISABLED';
+  }
+
+  private setIsInvalid(status: FormControlStatus): void {
+    this.hasError = status === 'INVALID';
+  }
+
+  public writeValue(value: unknown): void {
     this.value = value;
   }
 
-  public registerOnChange(cb: (value: string) => void): void {
+  public registerOnChange(cb: (value: unknown) => void): void {
     this.onChange = cb;
   }
 
@@ -58,11 +132,21 @@ export class InputComponent implements ControlValueAccessor, InputProtocol {
     this.onTouched = cb;
   }
 
+  public onChangeTimeout(value: unknown): void {
+    setTimeout(() => this.onChange(value));
+  }
+
   public onBlur(): void {
     this.onTouched();
+    this.setIsInvalid(this.control.status);
   }
 
   public createId(): string {
     return `input-id-${++innerId}`;
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }
