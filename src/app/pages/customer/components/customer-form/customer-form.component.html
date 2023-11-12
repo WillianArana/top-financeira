@@ -1,1 +1,40 @@
-<p>customer-form works!</p>
+<form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <app-input
+    class="form__field_name"
+    label="Nome:"
+    formControlName="name"
+  ></app-input>
+  <app-input
+    class="form__field_cpf"
+    label="CPF:"
+    formControlName="cpf"
+  ></app-input>
+  <app-input
+    class="form__field_birth-date"
+    label="Data Nascimento:"
+    formControlName="birthDate"
+  ></app-input>
+  <app-input
+    class="form__field_monthly-income"
+    label="Renda Mensal:"
+    formControlName="monthlyIncome"
+    type="number"
+  ></app-input>
+  <app-input
+    class="form__field_email"
+    label="E-mail:"
+    formControlName="email"
+    type="email"
+  ></app-input>
+  <app-input
+    class="form__field_createAt"
+    label="Data Cadastro:"
+    formControlName="createAt"
+  ></app-input>
+
+  <div class="form__button-container">
+    <app-button class="form__button" width="columms">SALVAR</app-button>
+  </div>
+</form>
+
+<!-- <app-form-debug [form]="formGroup"></app-form-debug> -->

@@ -1,4 +1,7 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   background-color: var(--color-brand-primary-darkest);
   color: var(--color-neutral-white);
@@ -18,7 +21,6 @@
 }
 
 .header__logo {
-  position: absolute;
   height: 32px;
   width: 140px;
   border-top-left-radius: 86px;
@@ -26,8 +28,8 @@
   background-color: var(--color-neutral-white);
   color: var(--color-brand-primary-medium);
   line-height: 30px;
-  left: -150px;
-  top: -2px;
+  display: inline-block;
+  margin-right: 6px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -36,14 +38,10 @@
   }
 }
 
-.navbar {
-  --hamburger-button-background-color: var(--color-neutral-white);
-}
-
 .main-container {
-  max-width: 1200px;
-  padding-left: 20px;
-  padding-right: 20px;
+  max-width: 1400px;
+  padding-left: 22px;
+  padding-right: 22px;
   margin-left: auto;
   margin-right: auto;
 }

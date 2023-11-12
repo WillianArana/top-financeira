@@ -22,3 +22,19 @@ body {
   color: var(--color-brand-primary-dark);
 }
 
+form.form {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: stretch;
+  flex-flow: row wrap;
+  align-items: stretch;
+  gap: 10px 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  form.form {
+    flex-direction: column;
+    width: 100%;
+  }
+}

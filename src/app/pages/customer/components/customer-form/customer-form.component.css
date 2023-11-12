@@ -1,0 +1,190 @@
+.form__field_name {
+  min-width: 266px;
+}
+
+.form__field_cpf {
+  min-width: 126px;
+}
+
+.form__field_birth-date {
+  min-width: 106px;
+}
+
+.form__field_monthly-income {
+  min-width: 120px;
+}
+
+.form__field_email {
+  min-width: 272px;
+}
+
+.form__field_createAt {
+  min-width: 106px;
+}
+
+.form__button-container {
+  padding-top: 64px;
+  display: inline-block;
+  flex-grow: 1;
+}
+
+.form__button {
+  float: right;
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 576px) {
+  .form__field_name {
+    flex-basis: 48%;
+  }
+
+  .form__field_cpf {
+    flex-basis: 22%;
+  }
+
+  .form__field_birth-date {
+    flex-basis: 25%;
+  }
+
+  .form__field_monthly-income {
+    flex-basis: 22%;
+  }
+
+  .form__field_email {
+    flex-basis: 48%;
+  }
+
+  .form__field_createAt {
+    flex-basis: 25%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .form__field_name {
+    flex-basis: 42%;
+  }
+
+  .form__field_cpf {
+    flex-basis: 18%;
+  }
+
+  .form__field_birth-date {
+    flex-basis: 18%;
+  }
+
+  .form__field_monthly-income {
+    flex-basis: 17%;
+  }
+
+  .form__field_email {
+    flex-basis: 61%;
+  }
+
+  .form__field_createAt {
+    flex-basis: 18%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .form__field_name {
+    flex-basis: 45%;
+  }
+
+  .form__field_cpf {
+    flex-basis: 17%;
+  }
+
+  .form__field_birth-date {
+    flex-basis: 17%;
+  }
+
+  .form__field_monthly-income {
+    flex-basis: 17%;
+  }
+
+  .form__field_email {
+    flex-basis: 45%;
+  }
+
+  .form__field_createAt {
+    flex-basis: 17%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .form__field_name {
+    flex-basis: 22%;
+  }
+
+  .form__field_cpf {
+    flex-basis: 13%;
+  }
+
+  .form__field_birth-date {
+    flex-basis: 13%;
+  }
+
+  .form__field_monthly-income {
+    flex-basis: 13%;
+  }
+
+  .form__field_email {
+    flex-basis: 22%;
+  }
+
+  .form__field_createAt {
+    flex-basis: 10%;
+  }
+}
+
+@media only screen and (min-width: 1242px) {
+  .form__field_name {
+    flex-basis: 22%;
+  }
+
+  .form__field_cpf {
+    flex-basis: 12%;
+  }
+
+  .form__field_birth-date {
+    flex-basis: 14%;
+  }
+
+  .form__field_monthly-income {
+    flex-basis: 15%;
+  }
+
+  .form__field_email {
+    flex-basis: 22%;
+  }
+
+  .form__field_createAt {
+    flex-basis: 10%;
+  }
+}
+
+@media only screen and (min-width: 1536px) {
+  .form__field_name {
+    flex-basis: 24%;
+  }
+
+  .form__field_cpf {
+    flex-basis: 12%;
+  }
+
+  .form__field_birth-date {
+    flex-basis: 12%;
+  }
+
+  .form__field_monthly-income {
+    flex-basis: 12%;
+  }
+
+  .form__field_email {
+    flex-basis: 24%;
+  }
+
+  .form__field_createAt {
+    flex-basis: 12%;
+  }
+}
