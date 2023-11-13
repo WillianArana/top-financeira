@@ -59,64 +59,70 @@ export class InputComponent
   private onChange: (value: unknown) => void = () => undefined;
   private onTouched: () => void = () => undefined;
 
-  constructor(@Inject(Injector) private injector: Injector) {}
+  constructor(@Inject(Injector) private readonly _injector: Injector) {}
 
   public ngOnInit(): void {
     this.setControl();
+    this.setConfigControl();
   }
 
   private setControl(): void {
-    const injectedControl = this.injector.get(NgControl);
-    const hasNotSetControl =
-      !this.setControlIfIsNgModel(injectedControl) &&
-      !this.setControlIfIsFormControlName(injectedControl);
-    if (hasNotSetControl) {
+    const injectedControl = this._injector.get(NgControl);
+    if (this.isNgModel(injectedControl)) {
+      this.setControlNgModel(injectedControl);
+    } else if (this.isFormControlName(injectedControl)) {
+      this.setControlFormControlName(injectedControl);
+    } else {
       this.control = (injectedControl as FormControlDirective)
         .form as FormControl;
     }
   }
 
-  private setControlIfIsNgModel(
+  public isNgModel(
     injectedControl: NgControl | FormControlName,
   ): injectedControl is NgControl {
-    const isNgModel = injectedControl.constructor === NgModel;
-    if (isNgModel) {
-      const { control, update } = injectedControl as NgModel;
-      this.control = control;
-      this.control.valueChanges
-        .pipe(
-          tap((value: unknown) => update.emit(value)),
-          takeUntil(this.destroyed$),
-        )
-        .subscribe();
-    }
-    return isNgModel;
+    return injectedControl.constructor === NgModel;
   }
 
-  private setControlIfIsFormControlName(
+  private setControlNgModel(injectedControl: NgControl): void {
+    const { control, update } = injectedControl as NgModel;
+    this.control = control;
+    this.control.valueChanges
+      .pipe(
+        tap((value: unknown) => update.emit(value)),
+        takeUntil(this.destroyed$),
+      )
+      .subscribe();
+  }
+
+  private setConfigControl(): void {
+    this.setIsReadOnly(this.control.status);
+    this.control.statusChanges
+      .pipe(distinctUntilChanged(), skip(1), takeUntil(this.destroyed$))
+      .subscribe((status) => {
+        this.setIsReadOnly(status);
+        this.setHasError(status);
+      });
+  }
+
+  public isFormControlName(
     injectedControl: NgControl | FormControlName,
   ): injectedControl is FormControlName {
-    const isFormControlName = injectedControl.constructor === FormControlName;
-    if (isFormControlName) {
-      this.control = this.injector
-        .get(FormGroupDirective)
-        .getControl(injectedControl as FormControlName);
-      this.setIsDisabled(this.control.status);
-      this.control.statusChanges
-        .pipe(distinctUntilChanged(), skip(1), takeUntil(this.destroyed$))
-        .subscribe((status) => {
-          this.setIsDisabled(status);
-          this.setIsInvalid(status);
-        });
-    }
-    return isFormControlName;
+    return injectedControl.constructor === FormControlName;
   }
 
-  private setIsDisabled(status: FormControlStatus): void {
+  private setControlFormControlName(injectedControl: FormControlName): void {
+    const formGroupDirective = this._injector.get(FormGroupDirective);
+    this.control = formGroupDirective.getControl(
+      injectedControl as FormControlName,
+    );
+  }
+
+  private setIsReadOnly(status: FormControlStatus): void {
     this.isReadOnly = status === 'DISABLED';
   }
 
-  private setIsInvalid(status: FormControlStatus): void {
+  private setHasError(status: FormControlStatus): void {
     this.hasError = status === 'INVALID';
   }
 
@@ -138,14 +144,14 @@ export class InputComponent
 
   public onBlur(): void {
     this.onTouched();
-    this.setIsInvalid(this.control.status);
+    this.setHasError(this.control.status);
   }
 
   public createId(): string {
     return `input-id-${++innerId}`;
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }
