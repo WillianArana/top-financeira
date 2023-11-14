@@ -47,8 +47,15 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
 
   @HostListener('keyup', ['$event'])
   public onKeyUp(event: KeyboardEvent) {
-    if (isKeyNumber(event.key) && !this.isMasked) {
-      this.addMask();
+    const isNotMasked = !this.isMasked;
+    if (isNotMasked) {
+      if (isKeyNumber(event.key)) {
+        this.addMask();
+      } else if (event.key === '.') {
+        this.addDotIfPossible();
+      } else if (event.key === '-') {
+        this.addDashIfPossible();
+      }
     }
   }
 
@@ -60,6 +67,33 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
         value = value.replace(/(\d{3})(\d)/, '$1.$2');
         value = value.replace(/(\d{3})(\d)/, '$1.$2');
         this.value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      }
+    });
+  }
+
+  private addDotIfPossible(): void {
+    setTimeout(() => {
+      const value = this.value;
+      if (value) {
+        const values = value.split('.');
+        const lastIndex = values.length - 1;
+        if (values.length < 3 && /^\d{3}$/.test(values[lastIndex])) {
+          values[lastIndex] = `${values[lastIndex]}.`;
+          this.value = values.join('');
+        }
+      }
+    });
+  }
+
+  private addDashIfPossible(): void {
+    setTimeout(() => {
+      const value = this.value;
+      if (
+        value &&
+        !value.includes('-') &&
+        /^\d{3}\.\d{3}\.\d{3}$/.test(value)
+      ) {
+        this.value = `${value}-`;
       }
     });
   }

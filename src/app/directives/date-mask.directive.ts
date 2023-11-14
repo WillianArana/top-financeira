@@ -66,7 +66,7 @@ export class DateMaskDirective implements OnInit, AfterContentInit {
   private addMask(): void {
     setTimeout(() => {
       let value = this.value;
-      if (value && value.split('/').length < 3) {
+      if (value?.split('/').length < 3) {
         value = value.replace(/\D/g, '');
         value = value.replace(/(\d{2})(\d)/, '$1/$2');
         this.value = value.replace(/(\d{2}\/\d{2})(\d)/, '$1/$2');
@@ -82,7 +82,7 @@ export class DateMaskDirective implements OnInit, AfterContentInit {
         if (values.length < 3) {
           const lastIndex = values.length - 1;
           values[lastIndex] = `${values[lastIndex]}/`.padStart(3, '0');
-          this.value = values.join('/');
+          this.value = values.join('');
         }
       }
     });
