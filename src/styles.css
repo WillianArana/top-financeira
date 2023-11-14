@@ -2,6 +2,7 @@
 @import "styles/typography.css";
 @import "styles/colors.css";
 @import "styles/icons.css";
+@import "styles/tooltip.css";
 
 body {
   background: linear-gradient(

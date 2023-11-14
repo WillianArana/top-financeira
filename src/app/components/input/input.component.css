@@ -34,12 +34,19 @@
   background-color: inherit;
 }
 
+.form-group__alert-icon-container {
+  position: relative;
+  cursor: help;
+  display: inline-block;
+  width: 0;
+  height: 0;
+}
+
 .form-group__alert-icon {
   position: absolute;
-  top: 2px;
+  top: -16px;
   right: 0;
   transform: translateY(-50%);
-  background-color: transparent;
 }
 
 .form-group--disabled {
@@ -79,4 +86,17 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+[data-tooltip] {
+  --offset: 0.2rem;
+  --carat-size: 8px;
+
+  &[data-tooltip-anchor="bottom"]::before {
+    left: -12px;
+  }
+
+  &[data-tooltip-anchor="bottom"]::after {
+    left: -12px;
+  }
 }
