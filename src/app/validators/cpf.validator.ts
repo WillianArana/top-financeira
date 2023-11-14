@@ -1,5 +1,5 @@
 export class CpfValidator {
-  isValid(value: string): boolean {
+  public isValid(value: string): boolean {
     if (!value || typeof value !== 'string') return false;
     if (value.length !== 11) return false;
     if (this.isSequencie(value)) return false;
