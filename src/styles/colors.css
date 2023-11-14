@@ -6,6 +6,13 @@
   --color-brand-primary-light: #11728b;
   --color-brand-primary-lightest: #7fabb7;
 
+  /* Secondary color  */
+  --color-support-02-darkest: #396C29;
+  --color-support-02-dark: #5CAC41;
+  --color-support-02-medium: #73D852;
+  --color-support-02-light: #9DE385;
+  --color-support-02-lightest: #C7EFB9;
+
   /* Neutral color */
   --color-neutral-darkest: #1a1a1a;
   --color-neutral-dark: #4f4f4f;

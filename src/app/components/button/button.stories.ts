@@ -19,17 +19,35 @@ const meta: Meta<ButtonComponent> = {
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-export const PrimaryDefaultColumms: Story = {
+export const PrimaryColumms: Story = {
   args: {
     isDisabled: false,
     width: 'columms',
   },
 };
 
-export const PrimaryDefaultContent: Story = {
+export const PrimaryContent: Story = {
   args: {
     isDisabled: false,
     width: 'content',
     type: 'button',
+    name: 'primary',
+  },
+};
+
+export const SecondaryColumms: Story = {
+  args: {
+    isDisabled: false,
+    width: 'columms',
+    name: 'secondary',
+  },
+};
+
+export const SecondaryContent: Story = {
+  args: {
+    isDisabled: false,
+    width: 'content',
+    type: 'button',
+    name: 'secondary',
   },
 };
