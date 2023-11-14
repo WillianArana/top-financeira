@@ -16,10 +16,11 @@
       (blur)="onBlur()"
     />
     <div
+      (click)="setHasError()"
       *ngIf="hasError"
       class="form-group__alert-icon-container paragraph-04"
       data-tooltip-anchor="bottom"
-      [attr.data-tooltip]="errorMessage"
+      [attr.data-tooltip]="hasError | getErrorMessage: this"
     >
       <i class="form-group__alert-icon alert__icon--md"></i>
     </div>

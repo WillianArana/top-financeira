@@ -19,7 +19,7 @@ export class FormValidations {
       maxlength: `precisa ter no máximo ${validatorValue['requiredLength']} caractere(s)`,
       min: `o valor mínimo permitido é ${validatorValue['min']}`,
       cpfInvalid: `CPF inválido`,
-      dateInvalid: `data inválido`,
+      dateInvalid: `data inválida`,
       lastNameInvalid: `percisa ter nome e sobrenome`,
       minAgeInvalid: `idade mínima permitida é ${validatorValue} ${
         Number(validatorValue) > 1 ? 'anos' : 'ano'

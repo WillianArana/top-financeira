@@ -142,7 +142,6 @@ describe('InputComponent', () => {
         expect(value).toBe('INVALID');
         expect(component.hasError).toBe(true);
         expect(component.isReadOnly).toBe(false);
-        expect(component.errorMessage).toBe('campo obrigatório');
         sub.unsubscribe();
         done();
       });
@@ -159,7 +158,6 @@ describe('InputComponent', () => {
       const sub = mockStatusChanges.pipe(skip(1)).subscribe((value) => {
         expect(value).toBe('DISABLED');
         expect(component.hasError).toBe(false);
-        expect(component.errorMessage).toBe('');
         expect(component.isReadOnly).toBe(true);
         sub.unsubscribe();
         done();

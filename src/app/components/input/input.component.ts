@@ -25,7 +25,6 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
-import { FormValidations } from '../../form.validation';
 import { InputType } from './input.type';
 
 let innerId = 0;
@@ -52,7 +51,6 @@ export class InputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   control!: FormControl;
   value: unknown = '';
-  errorMessage = '';
 
   private readonly destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private onChange: (value: unknown) => void = () => undefined;
@@ -118,28 +116,11 @@ export class InputComponent implements OnInit, OnDestroy, ControlValueAccessor {
     this.isReadOnly = status === 'DISABLED';
   }
 
-  private setHasError(status: FormControlStatus): void {
-    this.hasError = status === 'INVALID';
-    this.errorMessage = this.setErrorMessage();
-  }
-
-  private setErrorMessage(): string {
-    for (const propertyName in this.control.errors) {
-      if (
-        Object.prototype.hasOwnProperty.call(
-          this.control.errors,
-          propertyName,
-        ) &&
-        this.control.touched
-      ) {
-        return FormValidations.getErrorMsg(
-          this.label,
-          propertyName,
-          this.control.errors[propertyName],
-        );
-      }
-    }
-    return '';
+  setHasError(status: FormControlStatus = this.control.status): void {
+    this.hasError = false;
+    setTimeout(() => {
+      this.hasError = status === 'INVALID';
+    }, 10);
   }
 
   public writeValue(value: unknown): void {
