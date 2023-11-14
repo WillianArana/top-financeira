@@ -26,7 +26,6 @@ import {
   tap,
 } from 'rxjs';
 import { FormValidations } from '../../form.validation';
-import { IInput } from './input.interface';
 import { InputType } from './input.type';
 
 let innerId = 0;
@@ -43,9 +42,7 @@ let innerId = 0;
     },
   ],
 })
-export class InputComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, IInput
-{
+export class InputComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() id = this.createId();
   @Input() isReadOnly = false;
   @Input() hasError = false;
@@ -74,8 +71,7 @@ export class InputComponent
     } else if (this.isFormControlName(injectedControl)) {
       this.setControlFormControlName(injectedControl);
     } else {
-      this.control = (injectedControl as FormControlDirective)
-        .form as FormControl;
+      this.control = (injectedControl as FormControlDirective).form;
     }
     this.setConfigControl();
   }
@@ -115,9 +111,7 @@ export class InputComponent
 
   private setControlFormControlName(injectedControl: FormControlName): void {
     const formGroupDirective = this._injector.get(FormGroupDirective);
-    this.control = formGroupDirective.getControl(
-      injectedControl as FormControlName,
-    );
+    this.control = formGroupDirective.getControl(injectedControl);
   }
 
   private setIsReadOnly(status: FormControlStatus): void {
