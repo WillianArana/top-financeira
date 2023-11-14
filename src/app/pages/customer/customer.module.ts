@@ -8,8 +8,17 @@ import { CustomerRegistrationComponent } from './customer-registration/customer-
 import { CustomerRoutingModule } from './customer-routing.module';
 
 @NgModule({
-  imports: [CommonModule, CustomerRoutingModule, CustomerFormModule, CustomerTableModule],
-  declarations: [CustomerEditComponent, CustomerListingComponent, CustomerRegistrationComponent],
+  imports: [
+    CommonModule,
+    CustomerRoutingModule,
+    CustomerFormModule,
+    CustomerTableModule,
+  ],
+  declarations: [
+    CustomerEditComponent,
+    CustomerListingComponent,
+    CustomerRegistrationComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CustomerModule {}

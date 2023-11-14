@@ -8,17 +8,19 @@
     class="form__field_cpf"
     label="CPF:"
     formControlName="cpf"
+    appCpfMask
   ></app-input>
   <app-input
     class="form__field_birth-date"
     label="Data Nascimento:"
     formControlName="birthDate"
+    appDateMask
   ></app-input>
   <app-input
     class="form__field_monthly-income"
     label="Renda Mensal:"
     formControlName="monthlyIncome"
-    type="number"
+    appCurrencyMask
   ></app-input>
   <app-input
     class="form__field_email"
@@ -27,9 +29,10 @@
     type="email"
   ></app-input>
   <app-input
-    class="form__field_createAt"
+    class="form__field_created-at"
     label="Data Cadastro:"
-    formControlName="createAt"
+    formControlName="createdAt"
+    appDateMask
   ></app-input>
 
   <div class="form__button-container">
@@ -37,4 +40,4 @@
   </div>
 </form>
 
-<!-- <app-form-debug [form]="formGroup"></app-form-debug> -->
+<app-form-debug [form]="formGroup"></app-form-debug>

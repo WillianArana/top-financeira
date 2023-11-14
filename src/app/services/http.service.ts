@@ -21,15 +21,18 @@ export class HttpService {
     return new HttpParams();
   }
 
-  getById<T>(apiPath: string, id: string | number): Observable<T> {
+  public getById<T>(apiPath: string, id: string | number): Observable<T> {
     return this._http.get<T>(`${apiPath}/${id}`).pipe(take(1));
   }
 
-  create<T, DTO = unknown>(apiPath: string, resource: DTO): Observable<T> {
+  public create<T, DTO = unknown>(
+    apiPath: string,
+    resource: DTO,
+  ): Observable<T> {
     return this._http.post<T>(apiPath, resource, this.options).pipe(take(1));
   }
 
-  update<T, DTO = unknown>(
+  public update<T, DTO = unknown>(
     apiPath: string,
     id: number,
     resource: DTO,
@@ -39,11 +42,11 @@ export class HttpService {
       .pipe(take(1));
   }
 
-  delete<T = unknown>(apiPath: string, id: number): Observable<T> {
+  public delete<T = unknown>(apiPath: string, id: number): Observable<T> {
     return this._http.delete<T>(`${apiPath}/${id}`, this.options).pipe(take(1));
   }
 
-  search<T>(apiPath: string): Observable<T> {
+  public search<T>(apiPath: string): Observable<T> {
     return this._http.get<T>(`${apiPath}`).pipe(take(1));
   }
 }

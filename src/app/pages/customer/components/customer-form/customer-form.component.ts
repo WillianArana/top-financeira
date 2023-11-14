@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IForm } from 'src/app/interfaces/form.interface';
 import { FormService } from 'src/app/services/form.service';
+import { FormValidations } from '../../../../form.validation';
+import { CustomerService } from '../../customer.service';
+import { CustomerDto } from '../../models/customer.dto';
 
 @Component({
   selector: 'app-customer-form',
@@ -11,34 +14,10 @@ import { FormService } from 'src/app/services/form.service';
 export class CustomerFormComponent implements OnInit, IForm {
   formGroup!: FormGroup;
 
-  @Input() data = {
-    birthDate: {
-      value: '',
-      disabled: false,
-    },
-    cpf: {
-      value: '',
-      disabled: false,
-    },
-    createAt: {
-      value: null,
-      disabled: true,
-    },
-    email: {
-      value: '',
-      disabled: false,
-    },
-    monthlyIncome: {
-      value: null,
-      disabled: false,
-    },
-    name: {
-      value: '',
-      disabled: false,
-    },
-  };
+  @Input() cpfDisabled = false;
 
   constructor(
+    private readonly _customerService: CustomerService,
     private readonly _formBuilder: FormBuilder,
     private readonly _formService: FormService,
   ) {}
@@ -48,23 +27,33 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   private buildFormGroup(): void {
+    const dataForm = this._customerService.dataForm;
     this.formGroup = this._formBuilder.group({
-      birthDate: [this.data.birthDate, [Validators.required]],
-      cpf: [this.data.cpf, [Validators.required]],
-      createAt: [this.data.createAt],
-      email: [
-        this.data.email,
+      birthDate: [
+        dataForm.birthDate,
         [
-          Validators.pattern(
-            '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}',
-          ),
+          Validators.required,
+          FormValidations.date,
+          FormValidations.minAge(18),
+          FormValidations.maxAge(60),
         ],
       ],
-      monthlyIncome: [
-        this.data.monthlyIncome,
-        [Validators.required, Validators.min(0)],
+      cpf: [
+        {
+          value: dataForm.cpf,
+          disabled: this.cpfDisabled,
+        },
+        [Validators.required, FormValidations.cpf],
       ],
-      name: [this.data.name, [Validators.required, Validators.minLength(3)]],
+      createdAt: [
+        {
+          value: dataForm.createdAt,
+          disabled: true,
+        },
+      ],
+      email: [dataForm.email, [Validators.email]],
+      monthlyIncome: [dataForm.monthlyIncome, [Validators.required]],
+      name: [dataForm.name, [Validators.required, FormValidations.lastName]],
     });
   }
 
@@ -73,6 +62,7 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   private submit(): void {
-    throw new Error('method not implemented');
+    const dto = new CustomerDto(this.formGroup.value);
+    this._customerService.submit$.next(dto);
   }
 }

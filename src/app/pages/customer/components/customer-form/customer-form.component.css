@@ -18,7 +18,7 @@
   min-width: 272px;
 }
 
-.form__field_createAt {
+.form__field_created-at {
   min-width: 106px;
 }
 
@@ -30,7 +30,7 @@
 
 .form__button {
   float: right;
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 @media only screen and (min-width: 576px) {
@@ -54,7 +54,7 @@
     flex-basis: 48%;
   }
 
-  .form__field_createAt {
+  .form__field_created-at {
     flex-basis: 25%;
   }
 }
@@ -80,7 +80,7 @@
     flex-basis: 61%;
   }
 
-  .form__field_createAt {
+  .form__field_created-at {
     flex-basis: 18%;
   }
 }
@@ -106,7 +106,7 @@
     flex-basis: 45%;
   }
 
-  .form__field_createAt {
+  .form__field_created-at {
     flex-basis: 17%;
   }
 }
@@ -132,7 +132,7 @@
     flex-basis: 22%;
   }
 
-  .form__field_createAt {
+  .form__field_created-at {
     flex-basis: 10%;
   }
 }
@@ -158,7 +158,7 @@
     flex-basis: 22%;
   }
 
-  .form__field_createAt {
+  .form__field_created-at {
     flex-basis: 10%;
   }
 }
@@ -184,7 +184,7 @@
     flex-basis: 24%;
   }
 
-  .form__field_createAt {
+  .form__field_created-at {
     flex-basis: 12%;
   }
 }
