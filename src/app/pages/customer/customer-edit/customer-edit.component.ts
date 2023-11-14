@@ -12,7 +12,7 @@ import { CustomerDataForm } from '../models/customer.data-form';
 export class CustomerEditComponent implements OnInit, OnDestroy {
   readonly #subscripton = new Subscription();
 
-  showForm = false;
+  showForm = true;
 
   constructor(
     private readonly _route: ActivatedRoute,
@@ -20,13 +20,31 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    const customerId = this._route.snapshot.paramMap.get('id') as string;
+    this._customerService.initForm();
+    const customerId = +(this._route.snapshot.paramMap.get('id') as string);
     this._customerService.getById(customerId).subscribe((data) => {
-      this._customerService.setDataForm(
-        Object.assign(new CustomerDataForm(), data),
+      this._customerService.updateDataForm(
+        CustomerDataForm.fromCustomer(data).disableCpf(),
       );
-      const sub = this._customerService.onUpdateSubmit(+customerId).subscribe();
-      this.#subscripton.add(sub);
+      this.setUpdate(customerId);
+      this.setRemove(customerId);
+      this.reloadForm();
+    });
+  }
+
+  private setUpdate(id: number): void {
+    const sub = this._customerService.onUpdate(id).subscribe();
+    this.#subscripton.add(sub);
+  }
+
+  private setRemove(id: number): void {
+    const sub = this._customerService.onRemove(id).subscribe();
+    this.#subscripton.add(sub);
+  }
+
+  private reloadForm(): void {
+    this.showForm = false;
+    setTimeout(() => {
       this.showForm = true;
     });
   }

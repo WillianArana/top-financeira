@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, switchMap } from 'rxjs';
 import { CustomerService } from '../customer.service';
-import { CustomerDataForm } from '../models/customer.data-form';
 
 @Component({
   selector: 'app-customer-registration',
@@ -14,10 +13,14 @@ export class CustomerRegistrationComponent implements OnInit, OnDestroy {
   constructor(private readonly _customerService: CustomerService) {}
 
   public ngOnInit(): void {
-    this._customerService.setDataForm(new CustomerDataForm());
+    this._customerService.initForm();
+    this.setCreate();
+  }
+
+  private setCreate(): void {
     const sub = this._customerService
-      .onCreateSubmit()
-      .pipe(switchMap((data) => this._customerService.navigatTo(data.id)))
+      .onCreate()
+      .pipe(switchMap((data) => this._customerService.navigateTo(data.id)))
       .subscribe();
     this.#subscripton.add(sub);
   }

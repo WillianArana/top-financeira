@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IForm } from 'src/app/interfaces/form.interface';
-import { FormService } from 'src/app/services/form.service';
 import { FormValidations } from '../../../../form.validation';
 import { CustomerService } from '../../customer.service';
 import { CustomerDto } from '../../models/customer.dto';
@@ -14,12 +13,11 @@ import { CustomerDto } from '../../models/customer.dto';
 export class CustomerFormComponent implements OnInit, IForm {
   formGroup!: FormGroup;
 
-  @Input() cpfDisabled = false;
+  @Input() removeDisabled = true;
 
   constructor(
     private readonly _customerService: CustomerService,
     private readonly _formBuilder: FormBuilder,
-    private readonly _formService: FormService,
   ) {}
 
   public ngOnInit(): void {
@@ -38,19 +36,8 @@ export class CustomerFormComponent implements OnInit, IForm {
           FormValidations.maxAge(60),
         ],
       ],
-      cpf: [
-        {
-          value: dataForm.cpf,
-          disabled: this.cpfDisabled,
-        },
-        [Validators.required, FormValidations.cpf],
-      ],
-      createdAt: [
-        {
-          value: dataForm.createdAt,
-          disabled: true,
-        },
-      ],
+      cpf: [dataForm.cpf, [Validators.required, FormValidations.cpf]],
+      createdAt: [dataForm.createdAt],
       email: [dataForm.email, [Validators.email]],
       monthlyIncome: [dataForm.monthlyIncome, [Validators.required]],
       name: [dataForm.name, [Validators.required, FormValidations.lastName]],
@@ -58,11 +45,17 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   public onSubmit(): void {
-    this._formService.onSubmit(this.formGroup, this.submit.bind(this));
+    this._customerService.submitDto(
+      this.formGroup,
+      () => new CustomerDto(this.formGroup.value),
+    );
   }
 
-  private submit(): void {
-    const dto = new CustomerDto(this.formGroup.value);
-    this._customerService.submit$.next(dto);
+  public returnToCustomers(): void {
+    this._customerService.navigateTo('back');
+  }
+
+  public onRemove(): void {
+    this._customerService.remove();
   }
 }

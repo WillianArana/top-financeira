@@ -1,9 +1,9 @@
 export interface ICustomer {
+  id: number;
   birthDate: string;
   cpf: string;
   createdAt: Date;
   email: string;
-  id: number;
   monthlyIncome: number;
   name: string;
 }

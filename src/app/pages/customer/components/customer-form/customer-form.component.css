@@ -25,12 +25,23 @@
 .form__button-container {
   padding-top: 64px;
   display: inline-block;
+  width: 100%;
   flex-grow: 1;
 }
 
-.form__button {
+.form__button--return {
+  float: left;
+  margin-left: 0.5%;
+}
+
+.form__button--remove {
   float: right;
-  margin-right: 8px;
+  margin-right: 10px;
+}
+
+.form__button--save {
+  float: right;
+  margin-right: 0.5%;
 }
 
 @media only screen and (min-width: 576px) {
@@ -56,6 +67,18 @@
 
   .form__field_created-at {
     flex-basis: 25%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .form__button--return {
+    display: none;
+  }
+
+  .form__button--remove {
+    float: left;
+    margin-right: 0px;
+    margin-left: 0.5%;
   }
 }
 

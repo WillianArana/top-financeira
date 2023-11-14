@@ -36,8 +36,29 @@
   ></app-input>
 
   <div class="form__button-container">
-    <app-button class="form__button" width="columms">SALVAR</app-button>
+    <app-button
+      (click)="returnToCustomers()"
+      name="secondary"
+      class="form__button form__button--return"
+      width="columms"
+      type="button"
+      >VOLTAR</app-button
+    >
+
+    <app-button
+      name="primary"
+      class="form__button form__button--save"
+      width="columms"
+      >SALVAR</app-button
+    >
+    <app-button
+      (click)="onRemove()"
+      name="primary"
+      class="form__button form__button--remove"
+      width="columms"
+      type="button"
+      [isDisabled]="removeDisabled"
+      >REMOVER</app-button
+    >
   </div>
 </form>
-
-<app-form-debug [form]="formGroup"></app-form-debug>
