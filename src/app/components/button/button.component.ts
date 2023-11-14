@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() isDisabled = false;
-  @Input() type = 'submit';
+  @Input() type: 'submit' | 'button' = 'submit';
   @Input() name: 'primary' | 'secondary' = 'primary';
   @Input() width: 'content' | 'columms' = 'content';
 }
