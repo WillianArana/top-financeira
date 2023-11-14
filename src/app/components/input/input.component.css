@@ -51,6 +51,7 @@
 
 .form-group--disabled {
   background: var(--color-neutral-lightest);
+  pointer-events: none;
 }
 
 .form-group--disabled > .form-group__input-container > .form-group__input {
