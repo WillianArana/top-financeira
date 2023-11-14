@@ -22,6 +22,8 @@ describe('InputComponent', () => {
     valueChanges: mockValuesChanges,
     statusChanges: mockStatusChanges,
     status: 'VALID',
+    touched: true,
+    errors: {},
   };
 
   beforeEach(async () => {
@@ -34,7 +36,7 @@ describe('InputComponent', () => {
       },
     };
 
-    const Form_Group_Directive_PROVIDER = {
+    const FORM_GROUP_DIRECTIVE_PROVIDER = {
       provide: FormGroupDirective,
       useValue: {
         getControl: () => mockControl,
@@ -46,7 +48,7 @@ describe('InputComponent', () => {
     })
       .overrideComponent(InputComponent, {
         add: {
-          providers: [NG_CONTROL_PROVIDER, Form_Group_Directive_PROVIDER],
+          providers: [NG_CONTROL_PROVIDER, FORM_GROUP_DIRECTIVE_PROVIDER],
         },
       })
       .compileComponents();
@@ -57,6 +59,7 @@ describe('InputComponent', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    Object.assign(mockControl, { errors: {} });
   });
 
   it('should be create component', () => {
@@ -131,6 +134,7 @@ describe('InputComponent', () => {
     });
 
     it('should be setting a FormControlName', (done) => {
+      Object.assign(mockControl, { errors: { required: true } });
       jest.spyOn(component, 'isFormControlName').mockReturnValue(true);
       fixture.detectChanges();
 
@@ -138,6 +142,7 @@ describe('InputComponent', () => {
         expect(value).toBe('INVALID');
         expect(component.hasError).toBe(true);
         expect(component.isReadOnly).toBe(false);
+        expect(component.errorMessage).toBe('campo obrigatório');
         sub.unsubscribe();
         done();
       });
@@ -154,6 +159,7 @@ describe('InputComponent', () => {
       const sub = mockStatusChanges.pipe(skip(1)).subscribe((value) => {
         expect(value).toBe('DISABLED');
         expect(component.hasError).toBe(false);
+        expect(component.errorMessage).toBe('');
         expect(component.isReadOnly).toBe(true);
         sub.unsubscribe();
         done();

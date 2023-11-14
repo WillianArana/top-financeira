@@ -25,6 +25,7 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
+import { FormValidations } from '../../form.validation';
 import { IInput } from './input.interface';
 import { InputType } from './input.type';
 
@@ -54,6 +55,7 @@ export class InputComponent
 
   control!: FormControl;
   value: unknown = '';
+  errorMessage = '';
 
   private readonly destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private onChange: (value: unknown) => void = () => undefined;
@@ -63,7 +65,6 @@ export class InputComponent
 
   public ngOnInit(): void {
     this.setControl();
-    this.setConfigControl();
   }
 
   private setControl(): void {
@@ -76,6 +77,7 @@ export class InputComponent
       this.control = (injectedControl as FormControlDirective)
         .form as FormControl;
     }
+    this.setConfigControl();
   }
 
   public isNgModel(
@@ -124,6 +126,26 @@ export class InputComponent
 
   private setHasError(status: FormControlStatus): void {
     this.hasError = status === 'INVALID';
+    this.errorMessage = this.setErrorMessage();
+  }
+
+  private setErrorMessage(): string {
+    for (const propertyName in this.control.errors) {
+      if (
+        Object.prototype.hasOwnProperty.call(
+          this.control.errors,
+          propertyName,
+        ) &&
+        this.control.touched
+      ) {
+        return FormValidations.getErrorMsg(
+          this.label,
+          propertyName,
+          this.control.errors[propertyName],
+        );
+      }
+    }
+    return '';
   }
 
   public writeValue(value: unknown): void {
