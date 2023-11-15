@@ -1,0 +1,84 @@
+@import "src/app/components/button/button.component.css";
+
+button.button:focus {
+  border: 2px solid transparent !important;
+}
+
+.dialog {
+  margin: auto;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+  border: 0px;
+  border-radius: 20px;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.15s ease;
+  }
+}
+
+.dialog--active {
+  width: 382px;
+  height: 286px;
+  border-radius: 60px 0px 60px 60px;
+  transform: translateY(0px);
+  opacity: 1;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.dialog__form__button-container {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+.dialog__form__button {
+  display: flex;
+}
+
+.dialog__form__message-container {
+  height: 176px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  flex-grow: 1;
+  gap: 20px;
+  padding-top: 26px;
+}
+
+.dialog__form__message {
+  color: var(--color-brand-primary-medium);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.dialog__form__icon {
+  width: 57px;
+  height: 57px;
+  background-size: 57px 57px;
+}
+
+.dialog__form__icon--success {
+  filter: invert(94%) sepia(90%) saturate(818%) hue-rotate(41deg)
+    brightness(94%) contrast(79%);
+}
+
+.dialog__form__icon--danger {
+  filter: invert(27%) sepia(98%) saturate(6090%) hue-rotate(340deg)
+    brightness(92%) contrast(97%);
+}
+
+.dialog__form__icon--warning {
+  filter: invert(69%) sepia(99%) saturate(382%) hue-rotate(7deg)
+    brightness(104%) contrast(90%);
+}

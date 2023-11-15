@@ -18,7 +18,9 @@ const meta: Meta<HamburgerButtonComponent> = {
       ...args,
       toggle: actionsData.toggle,
     },
-    template: `<div style="position: relative;background-color: var(--color-brand-primary-darkest);height: 55px;width:75px"><app-hamburger-button ${argsToTemplate(args)}></app-hamburger-button></div>`,
+    template: `<div style="position: relative;background-color: var(--color-brand-primary-darkest);height: 55px;width:75px"><app-hamburger-button ${argsToTemplate(
+      args,
+    )}></app-hamburger-button></div>`,
   }),
 };
 

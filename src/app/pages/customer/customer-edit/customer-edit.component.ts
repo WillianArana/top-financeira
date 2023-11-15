@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DialogService } from 'src/app/components/dialog/dialog.service';
 import { CustomerService } from '../customer.service';
 import { CustomerDataForm } from '../models/customer.data-form';
 
@@ -15,20 +16,36 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   showForm = true;
 
   constructor(
-    private readonly _route: ActivatedRoute,
     private readonly _customerService: CustomerService,
+    private readonly _dialogService: DialogService,
+    private readonly _route: ActivatedRoute,
   ) {}
 
   public ngOnInit(): void {
     this._customerService.initForm();
     const customerId = +(this._route.snapshot.paramMap.get('id') as string);
-    this._customerService.getById(customerId).subscribe((data) => {
-      this._customerService.updateDataForm(
-        CustomerDataForm.fromCustomer(data).disableCpf(),
-      );
-      this.setUpdate(customerId);
-      this.setRemove(customerId);
-      this.reloadForm();
+    this._customerService.getById(customerId).subscribe({
+      next: (data) => {
+        this._customerService.updateDataForm(
+          CustomerDataForm.fromCustomer(data).disableCpf(),
+        );
+        this.setUpdate(customerId);
+        this.setRemove(customerId);
+        this.reloadForm();
+      },
+      error: (error) => {
+        if (error.status === 404) {
+          const sub = this._dialogService
+            .showNegativeFeedback({
+              message: 'Cliente não encontrado!',
+              textButton: 'OK',
+            })
+            .subscribe(() => {
+              this._customerService.navigateToBack();
+            });
+          this.#subscripton.add(sub);
+        }
+      },
     });
   }
 

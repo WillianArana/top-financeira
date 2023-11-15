@@ -1,7 +1,46 @@
+.icon__alert-circle--md {
+  --color-icon: invert(28%) sepia(0%) saturate(0%) hue-rotate(166deg)
+    brightness(108%) contrast(98%);
+  background: url("./../assets/icons/alert-circle.svg");
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat !important;
+  position: initial;
+  -webkit-filter: var(--color-icon);
+  filter: var(--color-icon);
+}
 
-.alert__icon--md {
-  --color-icon: invert(28%) sepia(0%) saturate(0%) hue-rotate(166deg) brightness(108%) contrast(98%);
-  background: url('./../assets/icons/alert.svg');
+.icon__alert-triangle--md {
+  --color-icon: invert(28%) sepia(0%) saturate(0%) hue-rotate(166deg)
+    brightness(108%) contrast(98%);
+  background: url("./../assets/icons/alert-triangle.svg");
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat !important;
+  position: initial;
+  -webkit-filter: var(--color-icon);
+  filter: var(--color-icon);
+}
+
+.icon__check-circle--md {
+  --color-icon: invert(28%) sepia(0%) saturate(0%) hue-rotate(166deg)
+    brightness(108%) contrast(98%);
+  background: url("./../assets/icons/check-circle.svg");
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat !important;
+  position: initial;
+  -webkit-filter: var(--color-icon);
+  filter: var(--color-icon);
+}
+
+.icon__help-circle--md {
+  --color-icon: invert(28%) sepia(0%) saturate(0%) hue-rotate(166deg)
+    brightness(108%) contrast(98%);
+  background: url("./../assets/icons/help-circle.svg");
   width: 24px;
   height: 24px;
   background-size: 24px 24px;

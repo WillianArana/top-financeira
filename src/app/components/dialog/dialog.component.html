@@ -1,0 +1,28 @@
+<dialog #dialog class="dialog">
+  <form class="dialog__form form">
+    <div class="dialog__form__message-container">
+      <i class="dialog__form__icon" [ngClass]="type"></i>
+      <p class="dialog__form__message">
+        {{ message }}
+      </p>
+    </div>
+    <div class="dialog__form__button-container">
+      <button
+        *ngIf="showButtonCancel"
+        name="primary"
+        class="dialog__form__button dialog__form__button--cancel button subtitle-03 columms"
+        formmethod="dialog"
+      >
+        {{ textButtonCancel }}
+      </button>
+      <button
+        name="primary"
+        class="dialog__form__button dialog__form__button--ok button subtitle-03 columms"
+        type="button"
+        (click)="confirm()"
+      >
+        {{ textButtonOk }}
+      </button>
+    </div>
+  </form>
+</dialog>

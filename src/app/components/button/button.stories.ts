@@ -12,7 +12,7 @@ const meta: Meta<ButtonComponent> = {
     props: {
       ...args,
     },
-    template: `<app-button ${argsToTemplate(args)}>Lorem Ipsum</app-button>`,
+    template: `<app-button ${argsToTemplate(args)}>Button</app-button>`,
   }),
 };
 

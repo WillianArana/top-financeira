@@ -140,14 +140,18 @@ describe('InputComponent', () => {
 
       const sub = mockStatusChanges.pipe(skip(1)).subscribe((value) => {
         expect(value).toBe('INVALID');
-        expect(component.hasError).toBe(true);
+        expect(component.hasError).toBe(false);
         expect(component.isReadOnly).toBe(false);
         sub.unsubscribe();
-        done();
       });
 
       mockStatusChanges.next('VALID');
       mockStatusChanges.next('INVALID');
+
+      setTimeout(() => {
+        expect(component.hasError).toBe(true);
+        done();
+      }, 100);
     });
 
     it('should be setting a FormControlDirective', (done) => {

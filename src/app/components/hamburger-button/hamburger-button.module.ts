@@ -3,10 +3,8 @@ import { NgModule } from '@angular/core';
 import { HamburgerButtonComponent } from './hamburger-button.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [HamburgerButtonComponent],
   exports: [HamburgerButtonComponent],
 })
-export class HamburgerButtonModule { }
+export class HamburgerButtonModule {}

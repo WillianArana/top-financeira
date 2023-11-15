@@ -1,4 +1,10 @@
-import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  flush,
+  tick,
+} from '@angular/core/testing';
 import { HamburgerButtonComponent } from './hamburger-button.component';
 import { HamburgerButtonModule } from './hamburger-button.module';
 
@@ -21,7 +27,7 @@ describe('HamburgerButtonComponent', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  })
+  });
 
   describe('toggleState', () => {
     it('should be state is true and emit toggle event', () => {
@@ -46,5 +52,4 @@ describe('HamburgerButtonComponent', () => {
       flush();
     }));
   });
-
 });

@@ -52,7 +52,7 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   public returnToCustomers(): void {
-    this._customerService.navigateTo('back');
+    this._customerService.navigateToBack();
   }
 
   public onRemove(): void {

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DialogModule } from './components/dialog/dialog.module';
 import { HamburgerButtonModule } from './components/hamburger-button/hamburger-button.module';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { HamburgerButtonModule } from './components/hamburger-button/hamburger-b
     AppRoutingModule,
     HttpClientModule,
     HamburgerButtonModule,
+    DialogModule,
   ],
   bootstrap: [AppComponent],
 })

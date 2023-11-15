@@ -45,7 +45,7 @@
 .form-group__alert-icon {
   position: absolute;
   top: -16px;
-  right: 0;
+  right: -8px;
   transform: translateY(-50%);
 }
 
@@ -94,10 +94,10 @@ input[type="number"] {
   --carat-size: 8px;
 
   &[data-tooltip-anchor="bottom"]::before {
-    left: -12px;
+    left: -4px;
   }
 
   &[data-tooltip-anchor="bottom"]::after {
-    left: -12px;
+    left: -4px;
   }
 }
