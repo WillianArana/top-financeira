@@ -1,0 +1,31 @@
+<nav *ngIf="items.length" class="pagination">
+  <button
+    [class.pagination__button--disabled]="isFirst"
+    class="pagination__button"
+    aria-label="PÁGINA ANTERIOR"
+    title="PÁGINA ANTERIOR"
+    (click)="prev()"
+  >
+    &lt;
+  </button>
+
+  <button
+    *ngFor="let item of items"
+    [class.pagination__button--active]="item.current"
+    class="pagination__number"
+    [att.page-index]="item.value"
+    (click)="emit(item.value)"
+  >
+    {{ item.value }}
+  </button>
+
+  <button
+    [class.pagination__button--disabled]="isLast"
+    class="pagination__button"
+    aria-label="PRÓXIMA PÁGINA"
+    title="PRÓXIMA PÁGINA"
+    (click)="next()"
+  >
+    &gt;
+  </button>
+</nav>

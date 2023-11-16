@@ -1,6 +1,49 @@
 {
     "pipes": [
         {
+            "name": "CpfPipe",
+            "id": "pipe-CpfPipe-d4b8b38969cb3dc560b617be8fc938aebbe29f54948a45645475a1f06bfd69f27fcc5fbb5264181ea2413bdbca218e766fb4832aee43767875ea950fca060918",
+            "file": "src/app/pipes/cpf.pipe.ts",
+            "type": "pipe",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "transform",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 7,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "ngname": "cpf",
+            "sourceCode": "import { Pipe, PipeTransform } from '@angular/core';\n\n@Pipe({\n  name: 'cpf',\n})\nexport class CpfPipe implements PipeTransform {\n  transform(value: string): string {\n    if (value) {\n      value = value.replace(/\\D/g, '');\n      value = value.replace(/(\\d{3})(\\d)/, '$1.$2');\n      value = value.replace(/(\\d{3})(\\d)/, '$1.$2');\n      value = value.replace(/(\\d{3})(\\d{1,2})$/, '$1-$2');\n    }\n    return value;\n  }\n}\n"
+        },
+        {
             "name": "GetErrorMessagePipe",
             "id": "pipe-GetErrorMessagePipe-8fbda60c078a128ed8fde9e449a3973742e96dbcf74bd57c3ce6fe413b6340e9ba4a3a7295be0b7469e49b005719e513cbc9fe7d662625a1f3fd853dfc2342a7",
             "file": "src/app/components/input/get-error-message.pipe.ts",
@@ -177,7 +220,7 @@
     "injectables": [
         {
             "name": "CustomerService",
-            "id": "injectable-CustomerService-0606c0346ed5aa6125ae2cae5c822f83c76904ac6e159e685acc164c218a231117110b1b6d55c34878bfcaf9d1a6712d67bcafde0bfcee320f0602adceb300ab",
+            "id": "injectable-CustomerService-02fbd385866e7aa6204db9f2dd7b568d84bb2196ea88b3a3e0b1915f2c92aa6b7152fb03c1bd8522dc31ed2b546abc6b9a3a0a1fc0fff4f4cf8b09a46fb7743d",
             "file": "src/app/pages/customer/customer.service.ts",
             "properties": [
                 {
@@ -355,7 +398,7 @@
                     "optional": false,
                     "returnType": "Observable<boolean>",
                     "typeParameters": [],
-                    "line": 105,
+                    "line": 106,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -380,7 +423,7 @@
                     "optional": false,
                     "returnType": "Observable<boolean>",
                     "typeParameters": [],
-                    "line": 100,
+                    "line": 101,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -398,37 +441,6 @@
                     "deprecationMessage": "",
                     "modifierKind": [
                         123
-                    ]
-                },
-                {
-                    "name": "onRemove",
-                    "args": [
-                        {
-                            "name": "id",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "Observable<boolean>",
-                    "typeParameters": [],
-                    "line": 93,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": "id",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
                     ]
                 },
                 {
@@ -464,15 +476,33 @@
                 },
                 {
                     "name": "remove",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "Observable<>",
                     "typeParameters": [],
                     "line": 89,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
                         123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
                     ]
                 },
                 {
@@ -511,7 +541,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { FormGroup } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Observable, Subject, switchMap, tap } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { navigateTo } from 'src/app/helper/navigate.helper';\nimport { FormService } from 'src/app/services/form.service';\nimport { HttpService } from 'src/app/services/http.service';\nimport { environment } from 'src/environments/environment.prod';\nimport { CustomerDataForm } from './models/customer.data-form';\nimport { CustomerDto } from './models/customer.dto';\nimport { ICustomer } from './models/interfaces/customer.interface';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class CustomerService {\n  #dataForm = new CustomerDataForm();\n\n  readonly #apiPath = `${environment.baseUrl}/custormer`;\n  readonly #submit$: Observable<CustomerDto>;\n  readonly #remove = new Subject<void>();\n\n  constructor(\n    private readonly _dialogService: DialogService,\n    private readonly _formService: FormService<CustomerDto>,\n    private readonly _httpServer: HttpService,\n    private readonly _router: Router,\n  ) {\n    this.#submit$ = this._formService.submit$;\n  }\n\n  get apiPath() {\n    return this.#apiPath;\n  }\n\n  get dataForm() {\n    return this.#dataForm;\n  }\n\n  public initForm(): void {\n    this.clearForm();\n  }\n\n  public clearForm(): void {\n    this.#dataForm = new CustomerDataForm();\n  }\n\n  public formGroupSubmit(form: FormGroup, createDtoFn: () => CustomerDto) {\n    this._formService.formGroupSubmit(form, createDtoFn);\n  }\n\n  public getById(id: number | string): Observable<ICustomer> {\n    return this._httpServer.getById(this.#apiPath, id);\n  }\n\n  public onCreate(): Observable<ICustomer> {\n    return this.#submit$.pipe(\n      switchMap((dto) =>\n        this._httpServer.create<ICustomer>(this.#apiPath, dto),\n      ),\n      tap(() =>\n        this._dialogService.showPositiveFeedback({\n          message: 'Cliente adicionado com sucesso!',\n          textButton: 'OK',\n        }),\n      ),\n    );\n  }\n\n  public updateDataForm(data: CustomerDataForm): void {\n    this.#dataForm = data;\n  }\n\n  public onUpdate(id: number): Observable<ICustomer> {\n    return this.#submit$.pipe(\n      switchMap((dto) =>\n        this._httpServer.update<ICustomer>(this.#apiPath, id, dto),\n      ),\n      tap(() =>\n        this._dialogService.showPositiveFeedback({\n          message: 'Cliente atualizado com sucesso!',\n          textButton: 'OK',\n        }),\n      ),\n    );\n  }\n\n  public remove(): void {\n    this.#remove.next();\n  }\n\n  public onRemove(id: number): Observable<boolean> {\n    return this.#remove.pipe(\n      switchMap(() => this._httpServer.delete<ICustomer>(this.#apiPath, id)),\n      switchMap(() => this.navigateToBack()),\n    );\n  }\n\n  public navigateToBack(): Observable<boolean> {\n    this.clearForm();\n    return this.navigateTo('back');\n  }\n\n  public navigateTo(...params: (string | number)[]): Observable<boolean> {\n    return navigateTo(this._router, ...params);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { FormGroup } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Observable, Subject, switchMap, tap } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { navigateTo } from 'src/app/helper/navigate.helper';\nimport { FormService } from 'src/app/services/form.service';\nimport { HttpService } from 'src/app/services/http.service';\nimport { environment } from 'src/environments/environment.prod';\nimport { CustomerDataForm } from './models/customer.data-form';\nimport { CustomerDto } from './models/customer.dto';\nimport { ICustomer } from './models/interfaces/customer.interface';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class CustomerService {\n  #dataForm = new CustomerDataForm();\n\n  readonly #apiPath = `${environment.baseUrl}/custormer`;\n  readonly #submit$: Observable<CustomerDto>;\n  readonly #remove = new Subject<void>();\n\n  constructor(\n    private readonly _dialogService: DialogService,\n    private readonly _formService: FormService<CustomerDto>,\n    private readonly _httpServer: HttpService,\n    private readonly _router: Router,\n  ) {\n    this.#submit$ = this._formService.submit$;\n  }\n\n  get apiPath() {\n    return this.#apiPath;\n  }\n\n  get dataForm() {\n    return this.#dataForm;\n  }\n\n  public initForm(): void {\n    this.clearForm();\n  }\n\n  public clearForm(): void {\n    this.#dataForm = new CustomerDataForm();\n  }\n\n  public formGroupSubmit(form: FormGroup, createDtoFn: () => CustomerDto) {\n    this._formService.formGroupSubmit(form, createDtoFn);\n  }\n\n  public getById(id: number | string): Observable<ICustomer> {\n    return this._httpServer.getById(this.#apiPath, id);\n  }\n\n  public onCreate(): Observable<ICustomer> {\n    return this.#submit$.pipe(\n      switchMap((dto) =>\n        this._httpServer.create<ICustomer>(this.#apiPath, dto),\n      ),\n      tap(() =>\n        this._dialogService.showPositiveFeedback({\n          message: 'Cliente adicionado com sucesso!',\n          textButton: 'OK',\n        }),\n      ),\n    );\n  }\n\n  public updateDataForm(data: CustomerDataForm): void {\n    this.#dataForm = data;\n  }\n\n  public onUpdate(id: number): Observable<ICustomer> {\n    return this.#submit$.pipe(\n      switchMap((dto) =>\n        this._httpServer.update<ICustomer>(this.#apiPath, id, dto),\n      ),\n      tap(() =>\n        this._dialogService.showPositiveFeedback({\n          message: 'Cliente atualizado com sucesso!',\n          textButton: 'OK',\n        }),\n      ),\n    );\n  }\n\n  public remove(id: number): Observable<unknown> {\n    return this._dialogService\n      .showQuestion({\n        message: 'Deseja realmente excluir este cliente?',\n        textButtonOk: 'SIM',\n        textButtonCancel: 'NÃO',\n      })\n      .pipe(\n        switchMap(() => this._httpServer.delete<ICustomer>(this.#apiPath, id)),\n      );\n  }\n\n  public navigateToBack(): Observable<boolean> {\n    this.clearForm();\n    return this.navigateTo('back');\n  }\n\n  public navigateTo(...params: (string | number)[]): Observable<boolean> {\n    return navigateTo(this._router, ...params);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2343,12 +2373,12 @@
     "directives": [
         {
             "name": "CpfMaskDirective",
-            "id": "directive-CpfMaskDirective-5291a803b6c73875d22ab780b43dc60797cf3bb4581b0ca3c8b867baa84eaaab689008b85b9b3e893476aca2dfa26cb60cc09677e3b27ccd393e59fac90decf0",
+            "id": "directive-CpfMaskDirective-dead60057c65fd1d3ba1359508f0e5d1c2d25d3ce06157ae6ec3c3ab146002eba0d707b31bc909ef8de4dc3a4c237c8fcd8525302ba5437c893c327791ee5bbd",
             "file": "src/app/directives/cpf-mask.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {\n  AfterContentInit,\n  Directive,\n  ElementRef,\n  HostListener,\n  OnInit,\n} from '@angular/core';\nimport { AbstractControl, NgControl } from '@angular/forms';\nimport { isKeyNotNumber, isKeyNumber } from '../helper/number.helper';\n\n@Directive({\n  selector: '[appCpfMask]',\n})\nexport class CpfMaskDirective implements OnInit, AfterContentInit {\n  constructor(\n    private readonly _elementRef: ElementRef,\n    private readonly _ngControl: NgControl,\n  ) {}\n\n  get control() {\n    return this._ngControl.control as AbstractControl;\n  }\n\n  get value() {\n    return this.control.value;\n  }\n\n  set value(value: string) {\n    this.control.setValue(value);\n  }\n\n  get isValidLength() {\n    return this.value?.length < 15;\n  }\n\n  public ngOnInit(): void {\n    this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {\n      if (isKeyNotNumber(event.key) || !this.isValidLength) {\n        event.preventDefault();\n      }\n    };\n  }\n\n  public ngAfterContentInit(): void {\n    this.addMask();\n  }\n\n  @HostListener('keyup', ['$event'])\n  public onKeyUp(event: KeyboardEvent) {\n    if (this.isValidLength) {\n      if (isKeyNumber(event.key)) {\n        this.addMask();\n      } else if (event.key === '.') {\n        this.addDotIfPossible();\n      } else if (event.key === '-') {\n        this.addDashIfPossible();\n      }\n    }\n  }\n\n  private addMask(): void {\n    setTimeout(() => {\n      let value = this.value;\n      if (value) {\n        value = value.replace(/\\D/g, '');\n        value = value.replace(/(\\d{3})(\\d)/, '$1.$2');\n        value = value.replace(/(\\d{3})(\\d)/, '$1.$2');\n        this.value = value.replace(/(\\d{3})(\\d{1,2})$/, '$1-$2');\n      }\n    });\n  }\n\n  private addDotIfPossible(): void {\n    setTimeout(() => {\n      const value = this.value;\n      if (value) {\n        const values = value.split('.');\n        const lastIndex = values.length - 1;\n        if (values.length < 3 && /^\\d{3}$/.test(values[lastIndex])) {\n          values[lastIndex] = `${values[lastIndex]}.`;\n          this.value = values.join('');\n        }\n      }\n    });\n  }\n\n  private addDashIfPossible(): void {\n    setTimeout(() => {\n      const value = this.value;\n      if (\n        value &&\n        !value.includes('-') &&\n        /^\\d{3}\\.\\d{3}\\.\\d{3}$/.test(value)\n      ) {\n        this.value = `${value}-`;\n      }\n    });\n  }\n\n  @HostListener('paste', ['$event'])\n  public onPaste() {\n    setTimeout(() => this.addMask(), 150);\n  }\n}\n",
+            "sourceCode": "import {\n  AfterContentInit,\n  Directive,\n  ElementRef,\n  HostListener,\n  OnInit,\n} from '@angular/core';\nimport { AbstractControl, NgControl } from '@angular/forms';\nimport { isKeyNotNumber, isKeyNumber } from '../helper/number.helper';\nimport { CpfPipe } from '../pipes/cpf.pipe';\n\n@Directive({\n  selector: '[appCpfMask]',\n})\nexport class CpfMaskDirective implements OnInit, AfterContentInit {\n  #cpfPipe = new CpfPipe();\n\n  constructor(\n    private readonly _elementRef: ElementRef,\n    private readonly _ngControl: NgControl,\n  ) {}\n\n  get control() {\n    return this._ngControl.control as AbstractControl;\n  }\n\n  get value() {\n    return this.control.value;\n  }\n\n  set value(value: string) {\n    this.control.setValue(value);\n  }\n\n  get isValidLength() {\n    return this.value?.length < 15;\n  }\n\n  public ngOnInit(): void {\n    this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {\n      if (isKeyNotNumber(event.key) || !this.isValidLength) {\n        event.preventDefault();\n      }\n    };\n  }\n\n  public ngAfterContentInit(): void {\n    this.addMask();\n  }\n\n  @HostListener('keyup', ['$event'])\n  public onKeyUp(event: KeyboardEvent) {\n    if (this.isValidLength) {\n      if (isKeyNumber(event.key)) {\n        this.addMask();\n      } else if (event.key === '.') {\n        this.addDotIfPossible();\n      } else if (event.key === '-') {\n        this.addDashIfPossible();\n      }\n    }\n  }\n\n  private addMask(): void {\n    setTimeout(() => {\n      this.value = this.#cpfPipe.transform(this.value);\n    });\n  }\n\n  private addDotIfPossible(): void {\n    setTimeout(() => {\n      const value = this.value;\n      if (value) {\n        const values = value.split('.');\n        const lastIndex = values.length - 1;\n        if (values.length < 3 && /^\\d{3}$/.test(values[lastIndex])) {\n          values[lastIndex] = `${values[lastIndex]}.`;\n          this.value = values.join('');\n        }\n      }\n    });\n  }\n\n  private addDashIfPossible(): void {\n    setTimeout(() => {\n      const value = this.value;\n      if (\n        value &&\n        !value.includes('-') &&\n        /^\\d{3}\\.\\d{3}\\.\\d{3}$/.test(value)\n      ) {\n        this.value = `${value}-`;\n      }\n    });\n  }\n\n  @HostListener('paste', ['$event'])\n  public onPaste() {\n    setTimeout(() => this.addMask(), 150);\n  }\n}\n",
             "selector": "[appCpfMask]",
             "providers": [],
             "inputsClass": [],
@@ -2372,7 +2402,7 @@
                     ],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49
+                    "line": 52
                 },
                 {
                     "name": "paste",
@@ -2382,10 +2412,24 @@
                     ],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 101
+                    "line": 98
                 }
             ],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "#cpfPipe",
+                    "defaultValue": "new CpfPipe()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "addDashIfPossible",
@@ -2393,7 +2437,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 87,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2406,7 +2450,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 73,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2419,7 +2463,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2432,7 +2476,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2445,7 +2489,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2465,7 +2509,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -2495,7 +2539,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 101,
+                    "line": 98,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -2532,7 +2576,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 14,
+                "line": 16,
                 "jsdoctags": [
                     {
                         "name": "_elementRef",
@@ -2561,7 +2605,7 @@
                         "name": "control",
                         "type": "",
                         "returnType": "",
-                        "line": 20
+                        "line": 23
                     }
                 },
                 "value": {
@@ -2580,7 +2624,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 28,
+                        "line": 31,
                         "jsdoctags": [
                             {
                                 "name": "value",
@@ -2597,7 +2641,7 @@
                         "name": "value",
                         "type": "",
                         "returnType": "",
-                        "line": 24
+                        "line": 27
                     }
                 },
                 "isValidLength": {
@@ -2606,7 +2650,7 @@
                         "name": "isValidLength",
                         "type": "",
                         "returnType": "",
-                        "line": 32
+                        "line": 35
                     }
                 }
             }
@@ -3395,7 +3439,7 @@
         },
         {
             "name": "CustomerEditComponent",
-            "id": "component-CustomerEditComponent-54338773d53d3e091921b129e509b11923edea8fbed20619340fef2e03714546c025be57f4eb187e39b792678c1480dc9bc3fcea128fb50f7af89383fca44bdc",
+            "id": "component-CustomerEditComponent-ef427a833e1df2e3ad40d3eecb143b1f96fb146a3a699eebbacd7475ae4e3f9463633dcf7a45dda39030efcafe174112cd13be68e5516d406662f37c72943e94",
             "file": "src/app/pages/customer/customer-edit/customer-edit.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3414,6 +3458,19 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "#customerId",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        121
+                    ]
+                },
                 {
                     "name": "#subscripton",
                     "defaultValue": "new Subscription()",
@@ -3436,7 +3493,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -3446,7 +3503,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 69,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3459,7 +3516,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 26,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3472,7 +3529,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 62,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3480,35 +3537,14 @@
                     ]
                 },
                 {
-                    "name": "setRemove",
-                    "args": [
-                        {
-                            "name": "id",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
+                    "name": "remove",
+                    "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 59,
                     "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        121
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": "id",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
+                    "deprecationMessage": ""
                 },
                 {
                     "name": "setUpdate",
@@ -3523,7 +3559,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 54,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3549,7 +3585,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { ActivatedRoute } from '@angular/router';\nimport { Subscription } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { CustomerService } from '../customer.service';\nimport { CustomerDataForm } from '../models/customer.data-form';\n\n@Component({\n  selector: 'app-customer-edit',\n  templateUrl: './customer-edit.component.html',\n  styleUrls: ['./customer-edit.component.css'],\n})\nexport class CustomerEditComponent implements OnInit, OnDestroy {\n  readonly #subscripton = new Subscription();\n\n  showForm = true;\n\n  constructor(\n    private readonly _customerService: CustomerService,\n    private readonly _dialogService: DialogService,\n    private readonly _route: ActivatedRoute,\n  ) {}\n\n  public ngOnInit(): void {\n    this._customerService.initForm();\n    const customerId = +(this._route.snapshot.paramMap.get('id') as string);\n    this._customerService.getById(customerId).subscribe({\n      next: (data) => {\n        this._customerService.updateDataForm(\n          CustomerDataForm.fromCustomer(data).disableCpf(),\n        );\n        this.setUpdate(customerId);\n        this.setRemove(customerId);\n        this.reloadForm();\n      },\n      error: (error) => {\n        if (error.status === 404) {\n          const sub = this._dialogService\n            .showNegativeFeedback({\n              message: 'Cliente não encontrado!',\n              textButton: 'OK',\n            })\n            .subscribe(() => {\n              this._customerService.navigateToBack();\n            });\n          this.#subscripton.add(sub);\n        }\n      },\n    });\n  }\n\n  private setUpdate(id: number): void {\n    const sub = this._customerService.onUpdate(id).subscribe();\n    this.#subscripton.add(sub);\n  }\n\n  private setRemove(id: number): void {\n    const sub = this._customerService.onRemove(id).subscribe();\n    this.#subscripton.add(sub);\n  }\n\n  private reloadForm(): void {\n    this.showForm = false;\n    setTimeout(() => {\n      this.showForm = true;\n    });\n  }\n\n  public ngOnDestroy(): void {\n    this.#subscripton.unsubscribe();\n  }\n}\n",
+            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { ActivatedRoute } from '@angular/router';\nimport { Subscription } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { CustomerService } from '../customer.service';\nimport { CustomerDataForm } from '../models/customer.data-form';\n\n@Component({\n  selector: 'app-customer-edit',\n  templateUrl: './customer-edit.component.html',\n  styleUrls: ['./customer-edit.component.css'],\n})\nexport class CustomerEditComponent implements OnInit, OnDestroy {\n  readonly #subscripton = new Subscription();\n\n  #customerId = 0;\n\n  showForm = true;\n\n  constructor(\n    private readonly _customerService: CustomerService,\n    private readonly _dialogService: DialogService,\n    private readonly _route: ActivatedRoute,\n  ) {}\n\n  public ngOnInit(): void {\n    this._customerService.initForm();\n    const customerId = +(this._route.snapshot.paramMap.get('id') as string);\n    this._customerService.getById(customerId).subscribe({\n      next: (data) => {\n        this._customerService.updateDataForm(\n          CustomerDataForm.fromCustomer(data).disableCpf(),\n        );\n        this.setUpdate(customerId);\n        this.reloadForm();\n        this.#customerId = customerId;\n      },\n      error: (error) => {\n        if (error.status === 404) {\n          const sub = this._dialogService\n            .showNegativeFeedback({\n              message: 'Cliente não encontrado!',\n              textButton: 'OK',\n            })\n            .subscribe(() => {\n              this._customerService.navigateToBack();\n            });\n          this.#subscripton.add(sub);\n        }\n      },\n    });\n  }\n\n  private setUpdate(id: number): void {\n    const sub = this._customerService.onUpdate(id).subscribe();\n    this.#subscripton.add(sub);\n  }\n\n  remove(): void {\n    const sub = this._customerService.remove(this.#customerId).subscribe(() => {\n      this._customerService.navigateToBack();\n    });\n    this.#subscripton.add(sub);\n  }\n\n  private reloadForm(): void {\n    this.showForm = false;\n    setTimeout(() => {\n      this.showForm = true;\n    });\n  }\n\n  public ngOnDestroy(): void {\n    this.#subscripton.unsubscribe();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3583,7 +3619,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 16,
+                "line": 18,
                 "jsdoctags": [
                     {
                         "name": "_customerService",
@@ -3618,11 +3654,11 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<h1 class=\"heading-page\">Cliente</h1>\n\n<app-customer-form\n  *ngIf=\"showForm\"\n  [removeDisabled]=\"false\"\n></app-customer-form>\n"
+            "templateData": "<h1 class=\"header-page\">Cliente</h1>\n\n<app-customer-form\n  *ngIf=\"showForm\"\n  [removeDisabled]=\"false\"\n  (remove)=\"remove()\"\n></app-customer-form>\n"
         },
         {
             "name": "CustomerFormComponent",
-            "id": "component-CustomerFormComponent-fa2b145f3c2d7c3e42baca68a29e0597fe06b2834fbf9b911de9581d899a17fd525480b0632a72000aca40d7c3cf7bcec2d1e3ecc8c23b2a8b4015ab59fd0e27",
+            "id": "component-CustomerFormComponent-cca3162519e4c22ec676c5b0faa921183a3f89295d88730ea1859c9a4167f587acc04bebc8d30d39d0ffba267d2997e7a77ac5578e464ab0f03bf6059e37ae08",
             "file": "src/app/pages/customer/components/customer-form/customer-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3644,12 +3680,21 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "remove",
+                    "defaultValue": "new EventEmitter<true>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "formGroup",
@@ -3658,7 +3703,7 @@
                     "type": "FormGroup",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 14
                 }
             ],
             "methodsClass": [
@@ -3668,7 +3713,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3681,7 +3726,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 24,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3694,7 +3739,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3707,7 +3752,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 48,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3720,7 +3765,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 55,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3735,7 +3780,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { take } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { IForm } from 'src/app/interfaces/form.interface';\nimport { FormValidations } from '../../../../form.validation';\nimport { CustomerService } from '../../customer.service';\nimport { CustomerDto } from '../../models/customer.dto';\n\n@Component({\n  selector: 'app-customer-form',\n  templateUrl: './customer-form.component.html',\n  styleUrls: ['./customer-form.component.css'],\n})\nexport class CustomerFormComponent implements OnInit, IForm {\n  formGroup!: FormGroup;\n\n  @Input() removeDisabled = true;\n\n  constructor(\n    private readonly _customerService: CustomerService,\n    private readonly _dialogService: DialogService,\n    private readonly _formBuilder: FormBuilder,\n  ) {}\n\n  public ngOnInit(): void {\n    this.buildFormGroup();\n  }\n\n  private buildFormGroup(): void {\n    const dataForm = this._customerService.dataForm;\n    this.formGroup = this._formBuilder.group({\n      birthDate: [\n        dataForm.birthDate,\n        [\n          Validators.required,\n          FormValidations.date,\n          FormValidations.minAge(18),\n          FormValidations.maxAge(60),\n        ],\n      ],\n      cpf: [dataForm.cpf, [Validators.required, FormValidations.cpf]],\n      createdAt: [dataForm.createdAt],\n      email: [dataForm.email, [Validators.email]],\n      monthlyIncome: [dataForm.monthlyIncome, [Validators.required]],\n      name: [dataForm.name, [Validators.required, FormValidations.lastName]],\n    });\n  }\n\n  public onSubmit(): void {\n    this._customerService.formGroupSubmit(\n      this.formGroup,\n      () => new CustomerDto(this.formGroup.value),\n    );\n  }\n\n  public returnToCustomers(): void {\n    this._customerService.navigateToBack();\n  }\n\n  public onRemove(): void {\n    this._dialogService\n      .showQuestion({\n        message: 'Deseja realmente excluir este cliente?',\n        textButtonOk: 'SIM',\n        textButtonCancel: 'NÃO',\n      })\n      .pipe(take(1))\n      .subscribe(() => {\n        this._customerService.remove();\n      });\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { IForm } from 'src/app/interfaces/form.interface';\nimport { FormValidations } from '../../../../form.validation';\nimport { CustomerService } from '../../customer.service';\nimport { CustomerDto } from '../../models/customer.dto';\n\n@Component({\n  selector: 'app-customer-form',\n  templateUrl: './customer-form.component.html',\n  styleUrls: ['./customer-form.component.css'],\n})\nexport class CustomerFormComponent implements OnInit, IForm {\n  formGroup!: FormGroup;\n\n  @Input() removeDisabled = true;\n  @Output() remove = new EventEmitter<true>();\n\n  constructor(\n    private readonly _customerService: CustomerService,\n    private readonly _formBuilder: FormBuilder,\n  ) {}\n\n  public ngOnInit(): void {\n    this.buildFormGroup();\n  }\n\n  private buildFormGroup(): void {\n    const dataForm = this._customerService.dataForm;\n    this.formGroup = this._formBuilder.group({\n      birthDate: [\n        dataForm.birthDate,\n        [\n          Validators.required,\n          FormValidations.date,\n          FormValidations.minAge(18),\n          FormValidations.maxAge(60),\n        ],\n      ],\n      cpf: [dataForm.cpf, [Validators.required, FormValidations.cpf]],\n      createdAt: [dataForm.createdAt],\n      email: [dataForm.email, [Validators.email]],\n      monthlyIncome: [dataForm.monthlyIncome, [Validators.required]],\n      name: [dataForm.name, [Validators.required, FormValidations.lastName]],\n    });\n  }\n\n  public onSubmit(): void {\n    this._customerService.formGroupSubmit(\n      this.formGroup,\n      () => new CustomerDto(this.formGroup.value),\n    );\n  }\n\n  public returnToCustomers(): void {\n    this._customerService.navigateToBack();\n  }\n\n  public onRemove(): void {\n    this.remove.emit(true);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3757,32 +3802,17 @@
                         "deprecationMessage": ""
                     },
                     {
-                        "name": "_dialogService",
-                        "type": "DialogService",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
                         "name": "_formBuilder",
                         "type": "FormBuilder",
                         "deprecated": false,
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 18,
+                "line": 17,
                 "jsdoctags": [
                     {
                         "name": "_customerService",
                         "type": "CustomerService",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "_dialogService",
-                        "type": "DialogService",
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
@@ -3844,7 +3874,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<h1 class=\"heading-page\">Clientes</h1>\n\n<app-customer-table></app-customer-table>\n"
+            "templateData": "<h1 class=\"header-page\">Clientes</h1>\n\n<app-customer-table></app-customer-table>\n"
         },
         {
             "name": "CustomerRegistrationComponent",
@@ -3969,11 +3999,11 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<h1 class=\"heading-page\">Cliente</h1>\n\n<app-customer-form></app-customer-form>\n"
+            "templateData": "<h1 class=\"header-page\">Cliente</h1>\n\n<app-customer-form></app-customer-form>\n"
         },
         {
             "name": "CustomerTableComponent",
-            "id": "component-CustomerTableComponent-055fa06b23b7a0e3262f93e4335714da99c1b9dbd1f9ce493c5e53d7be82d61f1b52883869c333676d2cbf7bf81ebbc4ca23dca38eb0f85951032aad7593bd45",
+            "id": "component-CustomerTableComponent-2bfc4815cc9ca637ecb8eaf76b1ee603fe366a85f937fc61a0896cbd2783ee0518441800bca64b0877d74c47c6df7240c21c8bbcce42d3b637d013c92fc376a7",
             "file": "src/app/pages/customer/components/customer-table/customer-table.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3993,6 +4023,32 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "#subscription",
+                    "defaultValue": "new Subscription()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "#subscriptionRemove",
+                    "defaultValue": "new Subscription()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
                     "name": "customers",
                     "defaultValue": "[]",
                     "deprecated": false,
@@ -4003,26 +4059,86 @@
                     "line": 15
                 },
                 {
-                    "name": "subscription",
-                    "defaultValue": "new Subscription()",
+                    "name": "dataPagination",
+                    "defaultValue": "{\n    last: 5,\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "identify",
+                    "defaultValue": "() => {...}",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 20,
+                    "modifierKind": [
+                        144
+                    ]
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "navigateToCustomerEdit",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 56,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "navigateToCustomerRegistration",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 52,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
                 {
                     "name": "ngOnDestroy",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 60,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
                 },
                 {
                     "name": "ngOnInit",
@@ -4030,9 +4146,43 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 33,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "remove",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -4042,11 +4192,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { FormBuilder } from '@angular/forms';\nimport { Subscription } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { TableService } from 'src/app/services/table.service';\nimport { CustomerService } from '../../customer.service';\nimport { ICustomer } from '../../models/interfaces/customer.interface';\n\n@Component({\n  selector: 'app-customer-table',\n  templateUrl: './customer-table.component.html',\n  styleUrls: ['./customer-table.component.css'],\n})\nexport class CustomerTableComponent implements OnInit, OnDestroy {\n  customers: ICustomer[] = [];\n\n  subscription = new Subscription();\n\n  constructor(\n    private readonly _customerService: CustomerService,\n    private readonly _dialogService: DialogService,\n    private readonly _formBuilder: FormBuilder,\n    private readonly _tableService: TableService<ICustomer>,\n  ) {}\n\n  ngOnInit(): void {\n    const apiPath = this._customerService.apiPath;\n    const sub = this._tableService.search(apiPath).subscribe((data) => {\n      this.customers = data;\n    });\n    this.subscription.add(sub);\n    this._tableService.submit('');\n  }\n\n  ngOnDestroy(): void {\n    this.subscription.unsubscribe();\n  }\n}\n",
+            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { FormBuilder } from '@angular/forms';\nimport { Subscription } from 'rxjs';\nimport { DialogService } from 'src/app/components/dialog/dialog.service';\nimport { TableService } from 'src/app/services/table.service';\nimport { CustomerService } from '../../customer.service';\nimport { ICustomer } from '../../models/interfaces/customer.interface';\n\n@Component({\n  selector: 'app-customer-table',\n  templateUrl: './customer-table.component.html',\n  styleUrls: ['./customer-table.component.css'],\n})\nexport class CustomerTableComponent implements OnInit, OnDestroy {\n  customers: ICustomer[] = [];\n\n  #subscription = new Subscription();\n  #subscriptionRemove = new Subscription();\n\n  readonly identify = (_: number, customer: ICustomer) => customer.id;\n\n  dataPagination = {\n    last: 5,\n  };\n\n  constructor(\n    private readonly _customerService: CustomerService,\n    private readonly _dialogService: DialogService,\n    private readonly _formBuilder: FormBuilder,\n    private readonly _tableService: TableService<ICustomer>,\n  ) {}\n\n  public ngOnInit(): void {\n    const apiPath = this._customerService.apiPath;\n    const sub = this._tableService.search(apiPath).subscribe((data) => {\n      this.customers = data;\n    });\n    this.#subscription.add(sub);\n    this._tableService.submit('');\n  }\n\n  public remove(id: number): void {\n    this.#subscriptionRemove.unsubscribe();\n    this.#subscriptionRemove = this._customerService\n      .remove(id)\n      .subscribe(() => {\n        this._tableService.submit('');\n        this.#subscriptionRemove.unsubscribe();\n      });\n  }\n\n  public navigateToCustomerRegistration(): void {\n    this._customerService.navigateTo('clientes', 'cliente');\n  }\n\n  public navigateToCustomerEdit(id: number): void {\n    this._customerService.navigateTo('clientes', id);\n  }\n\n  public ngOnDestroy(): void {\n    this.#subscription.unsubscribe();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ".table {\n  margin-left: 18px;\n}\n\n.table__action-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 22px;\n  min-width: 68px;\n}\n\n.table__action {\n  cursor: pointer;\n}\n\n.table__action--remove {\n  filter: invert(18%) sepia(53%) saturate(4423%) hue-rotate(334deg)\n    brightness(80%) contrast(104%);\n}\n\n.table__action--remove:hover {\n  filter: invert(27%) sepia(98%) saturate(6090%) hue-rotate(340deg)\n    brightness(92%) contrast(97%);\n}\n\n.table__action--edit {\n  filter: invert(21%) sepia(23%) saturate(2561%) hue-rotate(154deg)\n    brightness(95%) contrast(92%);\n}\n\n.table__action--edit:hover {\n  filter: invert(28%) sepia(17%) saturate(5839%) hue-rotate(163deg)\n    brightness(103%) contrast(87%);\n}\n\n.table__created-at {\n  text-align: center;\n  min-width: 126px;\n}\n\n.table__monthly-income {\n  text-align: right;\n  min-width: 120px;\n}\n\n.table__cpf {\n  min-width: 126px;\n}\n\n@media screen and (max-width: 740px) {\n  .table {\n    margin-left: 0;\n  }\n\n  table {\n    border: 0;\n\n    & > thead {\n      border: none;\n      clip: rect(0 0 0 0);\n      height: 1px;\n      margin: -1px;\n      overflow: hidden;\n      padding: 0;\n      position: absolute;\n      width: 1px;\n    }\n\n    & > tbody > tr {\n      & > td:first-child {\n        border-radius: 0;\n      }\n\n      & > td:last-child {\n        border-radius: 0;\n      }\n\n      &:nth-child(even) > td {\n        background-color: var(--color-neutral-white);\n      }\n    }\n  }\n\n  table td {\n    border: none;\n  }\n\n  table tr {\n    border-bottom: 3px solid var(--color-neutral-light);\n    display: block;\n    margin-bottom: 0.625em;\n    border-radius: none;\n  }\n\n  table td {\n    border-bottom: 1px solid var(--color-neutral-light);\n    display: block;\n    font-size: 0.8em;\n    text-align: right;\n  }\n\n  table td::before {\n    content: attr(data-label);\n    float: left;\n    font-weight: bold;\n    text-transform: uppercase;\n  }\n\n  table td:last-child {\n    border-bottom: 0;\n  }\n\n  .table__action-container {\n    justify-content: space-evenly;\n  }\n}\n",
                     "styleUrl": "./customer-table.component.css"
                 }
             ],
@@ -4082,7 +4232,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 17,
+                "line": 24,
                 "jsdoctags": [
                     {
                         "name": "_customerService",
@@ -4126,7 +4276,7 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<table class=\"table table-sortable paragraph-04\">\n  <thead>\n    <tr>\n      <th>NOME</th>\n      <th>CPF</th>\n      <th>DATA CADASTRO</th>\n      <th>RENDA MESAL</th>\n      <th>AÇÕES</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let customer of customers\">\n      <td>{{ customer.name }}</td>\n      <td>{{ customer.cpf }}</td>\n      <td>{{ customer.createdAt | date: \"dd/MM/yyyy\" }}</td>\n      <td>{{ customer.monthlyIncome }}</td>\n      <td>some action</td>\n    </tr>\n  </tbody>\n</table>\n"
+            "templateData": "<app-button (click)=\"navigateToCustomerRegistration()\"\n  >ADICIONAR CLIENTE</app-button\n>\n\n<table class=\"table table-sortable paragraph-04\">\n  <thead>\n    <tr>\n      <th scope=\"col\" class=\"table__name\">NOME</th>\n      <th scope=\"col\" class=\"table__cpf\">CPF</th>\n      <th scope=\"col\" class=\"table__created-at\">DATA CADASTRO</th>\n      <th scope=\"col\" class=\"table__monthly-income\">RENDA MENSAL</th>\n      <th scope=\"col\"></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr\n      *ngFor=\"let customer of customers; trackBy: identify\"\n      (dblclick)=\"navigateToEdit(customer.id)\"\n    >\n      <td data-label=\"NOME:\" class=\"table__name\">{{ customer.name }}</td>\n      <td data-label=\"CPF:\" class=\"table__cpf\">{{ customer.cpf | cpf }}</td>\n      <td data-label=\"DATA CADASTRO:\" class=\"table__created-at\">\n        {{ customer.createdAt | date: \"dd/MM/yyyy\" }}\n      </td>\n      <td data-label=\"RENDA MENSAL:\" class=\"table__monthly-income\">\n        {{ customer.monthlyIncome | number: \"1.2-2\" }}\n      </td>\n      <td>\n        <div class=\"table__action-container\">\n          <i\n            (click)=\"remove(customer.id)\"\n            class=\"table__action table__action--remove icon__trash-x--md\"\n            title=\"REMOVER\"\n          ></i>\n          <i\n            (click)=\"navigateToCustomerEdit(customer.id)\"\n            class=\"table__action table__action--edit icon__edit--md\"\n            title=\"EDITAR\"\n          ></i>\n        </div>\n      </td>\n    </tr>\n  </tbody>\n</table>\n<app-pagination [data]=\"dataPagination\"></app-pagination>\n"
         },
         {
             "name": "DialogComponent",
@@ -5332,18 +5482,207 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "PaginationComponent",
+            "id": "component-PaginationComponent-06e805f15e41282d997e046674ca9b64b6d8998e186fd063e19074ec6715b5eb6f3cc37344c70b6f3a912259f05d289e28fa1fa2a8d147cda6a3814a8e322271",
+            "file": "src/app/components/pagination/pagination.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-pagination",
+            "styleUrls": [
+                "./pagination.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./pagination.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "Pagination",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "page",
+                    "defaultValue": "new EventEmitter<number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "current",
+                    "defaultValue": "1",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "isFirst",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "isLast",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "emit",
+                    "args": [
+                        {
+                            "name": "page",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "page",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "next",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "prev",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\ntype Pagination = {\n  last: number;\n};\n\n@Component({\n  selector: 'app-pagination',\n  templateUrl: './pagination.component.html',\n  styleUrls: ['./pagination.component.css'],\n})\nexport class PaginationComponent {\n  current = 1;\n\n  @Output() page = new EventEmitter<number>();\n  @Input() set data(v: Pagination) {\n    const current = this.current;\n    const items = [];\n    for (let i = 1; i <= v.last; i++) {\n      items.push({\n        value: i,\n        current: i === current,\n      });\n    }\n    this.isFirst = items[0].current;\n    this.isLast = items[items.length - 1].current;\n    this.items = items;\n  }\n\n  items: {\n    value: number;\n    current: boolean;\n  }[] = [];\n\n  isFirst = true;\n  isLast = true;\n\n  public next(): void {\n    this.emit(this.current + 1);\n  }\n\n  public emit(page: number): void {\n    this.current = page;\n    const last = this.items[this.items.length - 1].value;\n    this.data = { last };\n    this.page.emit(page);\n  }\n\n  public prev(): void {\n    this.emit(this.current - 1);\n  }\n}\n\n/*\n\n<http://localhost:3000/custormer?_page=1&_limit=4&_sort=birthDate&_order=asc>; rel=\"first\",\n<http://localhost:3000/custormer?_page=2&_limit=4&_sort=birthDate&_order=asc>; rel=\"next\",\n<http://localhost:3000/custormer?_page=3&_limit=4&_sort=birthDate&_order=asc>; rel=\"last\"\n*/\n\n/*\n<http://localhost:3000/custormer?_page=1&_limit=4&_sort=birthDate&_order=asc>; rel=\"first\",\n<http://localhost:3000/custormer?_page=2&_limit=4&_sort=birthDate&_order=asc>; rel=\"prev\",\n <http://localhost:3000/custormer?_page=3&_limit=4&_sort=birthDate&_order=asc>; rel=\"last\"\n*/\n\n/*\n\n{\n    next: 2,\n    last: 1,\n  };\n\n  */\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".pagination {\n  display: flex;\n  align-items: center;\n  bottom: 0;\n  padding: 1rem 0;\n  justify-content: center;\n}\n\n.pagination__number,\n.pagination__button {\n  font-size: 1rem;\n  background-color: transparent;\n  border: none;\n  margin: 0.625rem 0.625rem;\n  cursor: pointer;\n  height: 2.5rem;\n  width: 2.5rem;\n  border-radius: 2.5rem;\n}\n\n.pagination__button:not(.pagination__button--disabled):hover {\n  background: var(--color-neutral-white);\n  font-weight: 700;\n}\n\n.pagination__button--active {\n  pointer-events: none;\n  color: var(--color-neutral-white);\n  background: var(--color-brand-primary-light);\n  font-weight: 700;\n}\n\n.pagination__button--disabled {\n  pointer-events: none;\n  color: var(--color-neutral-light);\n}\n",
+                    "styleUrl": "./pagination.component.css"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "data": {
+                    "name": "data",
+                    "setSignature": {
+                        "name": "data",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "v",
+                                "type": "Pagination",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 16,
+                        "jsdoctags": [
+                            {
+                                "name": "v",
+                                "type": "Pagination",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "templateData": "<nav *ngIf=\"items.length\" class=\"pagination\">\n  <button\n    [class.pagination__button--disabled]=\"isFirst\"\n    class=\"pagination__button\"\n    aria-label=\"PÁGINA ANTERIOR\"\n    title=\"PÁGINA ANTERIOR\"\n    (click)=\"prev()\"\n  >\n    &lt;\n  </button>\n\n  <button\n    *ngFor=\"let item of items\"\n    [class.pagination__button--active]=\"item.current\"\n    class=\"pagination__number\"\n    [att.page-index]=\"item.value\"\n    (click)=\"emit(item.value)\"\n  >\n    {{ item.value }}\n  </button>\n\n  <button\n    [class.pagination__button--disabled]=\"isLast\"\n    class=\"pagination__button\"\n    aria-label=\"PRÓXIMA PÁGINA\"\n    title=\"PRÓXIMA PÁGINA\"\n    (click)=\"next()\"\n  >\n    &gt;\n  </button>\n</nav>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-a2d1509292736f84344fc1a00f2fe7e3dec810084902df832b3b1e488e1ed3ba060489d5c2f32d8f592d335d7dca5006da1aac0fa9fe32861f5d95bac218ff02",
+            "id": "module-AppModule-ca94af81810c84b5a84d00ebd6867b3a14dc26e8390d38da3dde91ba255cde83ff94102510eb2f20b04807154d30a750388d0df93a2860093b72d6714a1ffa85",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { LOCALE_ID, NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { HttpClientModule } from '@angular/common/http';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { DialogModule } from './components/dialog/dialog.module';\nimport { HamburgerButtonModule } from './components/hamburger-button/hamburger-button.module';\n\nimport { registerLocaleData } from '@angular/common';\nimport localePt from '@angular/common/locales/pt';\n\nregisterLocaleData(localePt);\n\n@NgModule({\n  declarations: [AppComponent],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    HttpClientModule,\n    HamburgerButtonModule,\n    DialogModule,\n  ],\n  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
+            "sourceCode": "import { LOCALE_ID, NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { registerLocaleData } from '@angular/common';\nimport { HttpClientModule } from '@angular/common/http';\nimport localePt from '@angular/common/locales/pt';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { DialogModule } from './components/dialog/dialog.module';\nimport { HamburgerButtonModule } from './components/hamburger-button/hamburger-button.module';\n\nregisterLocaleData(localePt);\n\n@NgModule({\n  declarations: [AppComponent],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    HttpClientModule,\n    HamburgerButtonModule,\n    DialogModule,\n  ],\n  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -5619,13 +5958,13 @@
         },
         {
             "name": "CustomerTableModule",
-            "id": "module-CustomerTableModule-203831965348e0371d3b47021a03fd1b9a0b3a2fcead92c3630e895882dd1564e0fcc844ddea6b8d5a67489738a7e2025eaf613a0362533fc182b1eb79c0f852",
+            "id": "module-CustomerTableModule-babb71bceac9618176dc5591d1736d22c35080098f5decc488d405618905fb00fa08fa8539ccb060548280bea38d00a8e17de99c92133f9fdc96f064f04716c4",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/pages/customer/components/customer-table/customer-table.module.ts",
             "methods": [],
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { NgModule } from '@angular/core';\nimport { ButtonModule } from 'src/app/components/button/button.module';\nimport { InputModule } from 'src/app/components/input/input.module';\nimport { CustomerTableComponent } from './customer-table.component';\n\n@NgModule({\n  imports: [CommonModule, InputModule, ButtonModule],\n  declarations: [CustomerTableComponent],\n  exports: [CustomerTableComponent],\n})\nexport class CustomerTableModule {}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { NgModule } from '@angular/core';\nimport { ButtonModule } from 'src/app/components/button/button.module';\nimport { InputModule } from 'src/app/components/input/input.module';\nimport { PaginationModule } from 'src/app/components/pagination/pagination.module';\nimport { CpfPipe } from 'src/app/pipes/cpf.pipe';\nimport { CustomerTableComponent } from './customer-table.component';\n\n@NgModule({\n  imports: [CommonModule, PaginationModule, InputModule, ButtonModule],\n  declarations: [CustomerTableComponent, CpfPipe],\n  exports: [CustomerTableComponent],\n})\nexport class CustomerTableModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -5634,6 +5973,9 @@
                 {
                     "type": "declarations",
                     "elements": [
+                        {
+                            "name": "CpfPipe"
+                        },
                         {
                             "name": "CustomerTableComponent"
                         }
@@ -5647,6 +5989,9 @@
                         },
                         {
                             "name": "InputModule"
+                        },
+                        {
+                            "name": "PaginationModule"
                         }
                     ]
                 },
@@ -5882,6 +6227,50 @@
                     "elements": []
                 }
             ]
+        },
+        {
+            "name": "PaginationModule",
+            "id": "module-PaginationModule-a61eff356a54d34f210a15dc8f094e811e26e5cec71a73516d9285d767914d9ff713f9087114ee9a71a5bda8db9d73cbcb5d30af27ecb4f67a98f8151f75ddb7",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/components/pagination/pagination.module.ts",
+            "methods": [],
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { NgModule } from '@angular/core';\nimport { PaginationComponent } from './pagination.component';\n\n@NgModule({\n  imports: [CommonModule],\n  declarations: [PaginationComponent],\n  exports: [PaginationComponent],\n})\nexport class PaginationModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "PaginationComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "PaginationComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
         }
     ],
     "miscellaneous": {
@@ -5895,6 +6284,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  toggle: action('toggle'),\n}"
+            },
+            {
+                "name": "actionsData",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/pagination/pagination.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  page: action('page'),\n}"
             },
             {
                 "name": "convertToDate",
@@ -5945,6 +6344,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/pagination/pagination.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    data: {\n      last: 5,\n    },\n  },\n}"
             },
             {
                 "name": "Default",
@@ -6170,6 +6579,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/pagination/pagination.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<PaginationComponent>",
+                "defaultValue": "{\n  title: 'Pagination',\n  component: PaginationComponent,\n  excludeStories: /.*Data$/,\n  tags: ['autodocs'],\n  render: (args: PaginationComponent) => ({\n    props: {\n      ...args,\n      page: actionsData.page,\n    },\n    template: `<app-pagination ${argsToTemplate(args)}></app-pagination>`,\n  }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6281,6 +6700,17 @@
                 "kind": 186
             },
             {
+                "name": "Pagination",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/app/components/pagination/pagination.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 181
+            },
+            {
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -6350,6 +6780,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<PaginationComponent>",
+                "file": "src/app/components/pagination/pagination.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 177
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<InputComponent>",
                 "file": "src/app/components/input/input.stories.ts",
                 "deprecated": false,
@@ -6390,6 +6831,38 @@
                     "deprecationMessage": "",
                     "type": "Meta<HamburgerButtonComponent>",
                     "defaultValue": "{\n  title: 'Hamburger Button',\n  component: HamburgerButtonComponent,\n  excludeStories: /.*Data$/,\n  tags: ['autodocs'],\n  render: (args: HamburgerButtonComponent) => ({\n    props: {\n      ...args,\n      toggle: actionsData.toggle,\n    },\n    template: `<div style=\"position: relative;background-color: var(--color-brand-primary-darkest);height: 55px;width:75px\"><app-hamburger-button ${argsToTemplate(\n      args,\n    )}></app-hamburger-button></div>`,\n  }),\n}"
+                }
+            ],
+            "src/app/components/pagination/pagination.stories.ts": [
+                {
+                    "name": "actionsData",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/pagination/pagination.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  page: action('page'),\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/pagination/pagination.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    data: {\n      last: 5,\n    },\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/pagination/pagination.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<PaginationComponent>",
+                    "defaultValue": "{\n  title: 'Pagination',\n  component: PaginationComponent,\n  excludeStories: /.*Data$/,\n  tags: ['autodocs'],\n  render: (args: PaginationComponent) => ({\n    props: {\n      ...args,\n      page: actionsData.page,\n    },\n    template: `<app-pagination ${argsToTemplate(args)}></app-pagination>`,\n  }),\n}"
                 }
             ],
             "src/app/helper/date.helper.ts": [
@@ -6791,6 +7264,19 @@
                     "kind": 186
                 }
             ],
+            "src/app/components/pagination/pagination.component.ts": [
+                {
+                    "name": "Pagination",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/app/components/pagination/pagination.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 181
+                }
+            ],
             "src/stories/Button.stories.ts": [
                 {
                     "name": "Story",
@@ -6863,6 +7349,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<HamburgerButtonComponent>",
                     "file": "src/app/components/hamburger-button/hamburger-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 177
+                }
+            ],
+            "src/app/components/pagination/pagination.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<PaginationComponent>",
+                    "file": "src/app/components/pagination/pagination.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -7182,12 +7681,51 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/pagination/pagination.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PaginationComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/pagination/pagination.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "actionsData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/pagination/pagination.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/pagination/pagination.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/directives/cpf-mask.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
                 "name": "CpfMaskDirective",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -7292,7 +7830,7 @@
                 "linktype": "component",
                 "name": "CustomerFormComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -7301,7 +7839,7 @@
                 "linktype": "component",
                 "name": "CustomerTableComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -7310,7 +7848,7 @@
                 "linktype": "component",
                 "name": "CustomerEditComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -7367,7 +7905,7 @@
                 "linktype": "injectable",
                 "name": "CustomerService",
                 "coveragePercent": 0,
-                "coverageCount": "0/17",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {
@@ -7402,6 +7940,15 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "NotFoundComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pipes/cpf.pipe.ts",
+                "type": "pipe",
+                "linktype": "pipe",
+                "name": "CpfPipe",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
