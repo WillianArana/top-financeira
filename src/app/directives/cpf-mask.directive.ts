@@ -7,11 +7,14 @@ import {
 } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { isKeyNotNumber, isKeyNumber } from '../helper/number.helper';
+import { CpfPipe } from '../pipes/cpf.pipe';
 
 @Directive({
   selector: '[appCpfMask]',
 })
 export class CpfMaskDirective implements OnInit, AfterContentInit {
+  #cpfPipe = new CpfPipe();
+
   constructor(
     private readonly _elementRef: ElementRef,
     private readonly _ngControl: NgControl,
@@ -29,13 +32,13 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
     this.control.setValue(value);
   }
 
-  get isMasked() {
-    return /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(this.value);
+  get isValidLength() {
+    return this.value?.length < 15;
   }
 
   public ngOnInit(): void {
     this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {
-      if (isKeyNotNumber(event.key) || this.isMasked) {
+      if (isKeyNotNumber(event.key) || !this.isValidLength) {
         event.preventDefault();
       }
     };
@@ -47,8 +50,7 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
 
   @HostListener('keyup', ['$event'])
   public onKeyUp(event: KeyboardEvent) {
-    const isNotMasked = !this.isMasked;
-    if (isNotMasked) {
+    if (this.isValidLength) {
       if (isKeyNumber(event.key)) {
         this.addMask();
       } else if (event.key === '.') {
@@ -61,13 +63,7 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
 
   private addMask(): void {
     setTimeout(() => {
-      let value = this.value;
-      if (value) {
-        value = value.replace(/\D/g, '');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        this.value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-      }
+      this.value = this.#cpfPipe.transform(this.value);
     });
   }
 

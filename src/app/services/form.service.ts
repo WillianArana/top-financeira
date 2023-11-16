@@ -1,21 +1,24 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
 })
-export class FormService<DTO = unknown> {
-  readonly #submit = new Subject<DTO>();
-  readonly #remove = new Subject<void>();
+export class FormService<T = unknown> {
+  readonly #submit = new Subject<T>();
+  readonly submit$ = this.#submit.asObservable();
 
-  public submitDto(form: FormGroup | FormArray, createDtoFn: () => DTO): void {
+  public formGroupSubmit(form: FormGroup | FormArray, cb: () => T): void {
     if (form.valid) {
-      const dto = createDtoFn();
-      this.#submit.next(dto);
+      this.submit(cb());
     } else {
       this.checkFormValidations(form);
     }
+  }
+
+  public submit(data: T): void {
+    this.#submit.next(data);
   }
 
   private checkFormValidations(form: FormGroup | FormArray): void {
@@ -24,23 +27,12 @@ export class FormService<DTO = unknown> {
       control.markAsDirty();
       control.markAsTouched();
       const status = control.status;
-      (control.statusChanges as EventEmitter<string>).emit('CHECK_COMPONENT');
-      (control.statusChanges as EventEmitter<string>).emit(status);
+      const statusChanges = control.statusChanges as EventEmitter<string>;
+      statusChanges.emit('CHECK_COMPONENT');
+      statusChanges.emit(status);
       if (control instanceof FormGroup || control instanceof FormArray) {
         this.checkFormValidations(control);
       }
     });
-  }
-
-  public onSubmitDto(): Observable<DTO> {
-    return this.#submit.asObservable();
-  }
-
-  public remove(): void {
-    this.#remove.next(undefined);
-  }
-
-  public onRemove(): Observable<void> {
-    return this.#remove.asObservable();
   }
 }

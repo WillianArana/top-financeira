@@ -4,3 +4,4 @@ coverage
 **/*spec.ts
 **/*mock.ts
 server.js
+stories

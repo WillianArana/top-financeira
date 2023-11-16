@@ -1,15 +1,20 @@
 @import "styles/reset.css";
-@import "styles/typography.css";
 @import "styles/colors.css";
 @import "styles/icons.css";
+@import "styles/table.css";
 @import "styles/tooltip.css";
+@import "styles/typography.css";
 
 body {
+  background-color: var(--color-neutral-white);
   background: linear-gradient(
-    90deg,
-    var(--color-neutral-white) 49.58%,
-    var(--color-neutral-lightest) 99.89%
-  );
+      0deg,
+      rgba(255, 255, 255, 0.5) 49.58%,
+      rgba(237, 237, 237, 0.5) 99.89%
+    )
+    no-repeat;
+  width: 100vw;
+  height: 100vh;
 }
 
 .heading-page {

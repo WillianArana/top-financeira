@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IForm } from 'src/app/interfaces/form.interface';
 import { FormValidations } from '../../../../form.validation';
@@ -14,6 +14,7 @@ export class CustomerFormComponent implements OnInit, IForm {
   formGroup!: FormGroup;
 
   @Input() removeDisabled = true;
+  @Output() remove = new EventEmitter<true>();
 
   constructor(
     private readonly _customerService: CustomerService,
@@ -45,7 +46,7 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   public onSubmit(): void {
-    this._customerService.submitDto(
+    this._customerService.formGroupSubmit(
       this.formGroup,
       () => new CustomerDto(this.formGroup.value),
     );
@@ -56,6 +57,6 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   public onRemove(): void {
-    this._customerService.remove();
+    this.remove.emit(true);
   }
 }

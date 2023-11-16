@@ -50,7 +50,7 @@
 }
 
 .form-group--disabled {
-  background: var(--color-neutral-lightest);
+  background-color: var(--color-neutral-lightest);
   pointer-events: none;
 }
 

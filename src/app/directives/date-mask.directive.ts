@@ -32,13 +32,13 @@ export class DateMaskDirective implements OnInit, AfterContentInit {
     this.control.setValue(value);
   }
 
-  get isMasked() {
-    return /^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$/g.test(this.value);
+  get isValidLength() {
+    return this.value?.length < 10;
   }
 
   public ngOnInit(): void {
     this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {
-      if (isKeyNotNumber(event.key) || this.isMasked) {
+      if (isKeyNotNumber(event.key) || !this.isValidLength) {
         event.preventDefault();
       }
     };
@@ -53,8 +53,7 @@ export class DateMaskDirective implements OnInit, AfterContentInit {
 
   @HostListener('keyup', ['$event'])
   public onKeyUp(event: KeyboardEvent) {
-    const isNotMasked = !this.isMasked;
-    if (isNotMasked) {
+    if (this.isValidLength) {
       if (isKeyNumber(event.key)) {
         this.addMask();
       } else if (event.key === '/') {

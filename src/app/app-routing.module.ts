@@ -14,7 +14,7 @@ export const routes: Routes = [
         (m) => m.NotFoundModule,
       ),
   },
-  { path: '', redirectTo: 'clientes/novo', pathMatch: 'full' },
+  { path: '', redirectTo: 'clientes', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
 ];
 

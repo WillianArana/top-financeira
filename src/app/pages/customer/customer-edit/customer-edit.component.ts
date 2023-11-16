@@ -13,6 +13,8 @@ import { CustomerDataForm } from '../models/customer.data-form';
 export class CustomerEditComponent implements OnInit, OnDestroy {
   readonly #subscripton = new Subscription();
 
+  #customerId = 0;
+
   showForm = true;
 
   constructor(
@@ -30,8 +32,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
           CustomerDataForm.fromCustomer(data).disableCpf(),
         );
         this.setUpdate(customerId);
-        this.setRemove(customerId);
         this.reloadForm();
+        this.#customerId = customerId;
       },
       error: (error) => {
         if (error.status === 404) {
@@ -54,8 +56,10 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     this.#subscripton.add(sub);
   }
 
-  private setRemove(id: number): void {
-    const sub = this._customerService.onRemove(id).subscribe();
+  remove(): void {
+    const sub = this._customerService.remove(this.#customerId).subscribe(() => {
+      this._customerService.navigateToBack();
+    });
     this.#subscripton.add(sub);
   }
 

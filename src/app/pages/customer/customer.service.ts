@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, switchMap, take, tap } from 'rxjs';
+import { Observable, Subject, switchMap, tap } from 'rxjs';
 import { DialogService } from 'src/app/components/dialog/dialog.service';
 import { navigateTo } from 'src/app/helper/navigate.helper';
 import { FormService } from 'src/app/services/form.service';
@@ -19,7 +19,7 @@ export class CustomerService {
 
   readonly #apiPath = `${environment.baseUrl}/custormer`;
   readonly #submit$: Observable<CustomerDto>;
-  readonly #remove$: Observable<void>;
+  readonly #remove = new Subject<void>();
 
   constructor(
     private readonly _dialogService: DialogService,
@@ -27,8 +27,11 @@ export class CustomerService {
     private readonly _httpServer: HttpService,
     private readonly _router: Router,
   ) {
-    this.#submit$ = this._formService.onSubmitDto();
-    this.#remove$ = this._formService.onRemove();
+    this.#submit$ = this._formService.submit$;
+  }
+
+  get apiPath() {
+    return this.#apiPath;
   }
 
   get dataForm() {
@@ -43,8 +46,8 @@ export class CustomerService {
     this.#dataForm = new CustomerDataForm();
   }
 
-  public submitDto(form: FormGroup, createDtoFn: () => CustomerDto) {
-    this._formService.submitDto(form, createDtoFn);
+  public formGroupSubmit(form: FormGroup, createDtoFn: () => CustomerDto) {
+    this._formService.formGroupSubmit(form, createDtoFn);
   }
 
   public getById(id: number | string): Observable<ICustomer> {
@@ -83,24 +86,16 @@ export class CustomerService {
     );
   }
 
-  public remove(): void {
-    this._dialogService
+  public remove(id: number): Observable<unknown> {
+    return this._dialogService
       .showQuestion({
         message: 'Deseja realmente excluir este cliente?',
         textButtonOk: 'SIM',
         textButtonCancel: 'NÃO',
       })
-      .pipe(take(1))
-      .subscribe(() => {
-        this._formService.remove();
-      });
-  }
-
-  public onRemove(id: number): Observable<boolean> {
-    return this.#remove$.pipe(
-      switchMap(() => this._httpServer.delete<ICustomer>(this.#apiPath, id)),
-      switchMap(() => this.navigateToBack()),
-    );
+      .pipe(
+        switchMap(() => this._httpServer.delete<ICustomer>(this.#apiPath, id)),
+      );
   }
 
   public navigateToBack(): Observable<boolean> {

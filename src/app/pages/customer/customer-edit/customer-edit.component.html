@@ -1,6 +1,7 @@
-<h1 class="heading-page">Atualizar Cliente</h1>
+<h1 class="heading-page">Cliente</h1>
 
 <app-customer-form
   *ngIf="showForm"
   [removeDisabled]="false"
+  (remove)="remove()"
 ></app-customer-form>

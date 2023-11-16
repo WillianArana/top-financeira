@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 
@@ -8,45 +8,27 @@ import { Observable, take } from 'rxjs';
 export class HttpService {
   constructor(private readonly _http: HttpClient) {}
 
-  private get options(): {
-    headers?: HttpHeaders;
-    params?: HttpParams;
-  } {
-    return {
-      params: this.params,
-    };
+  public getById<T>(url: string, id: string | number): Observable<T> {
+    return this._http.get<T>(`${url}/${id}`).pipe(take(1));
   }
 
-  private get params(): HttpParams {
-    return new HttpParams();
-  }
-
-  public getById<T>(apiPath: string, id: string | number): Observable<T> {
-    return this._http.get<T>(`${apiPath}/${id}`).pipe(take(1));
-  }
-
-  public create<T, DTO = unknown>(
-    apiPath: string,
-    resource: DTO,
-  ): Observable<T> {
-    return this._http.post<T>(apiPath, resource, this.options).pipe(take(1));
+  public create<T, DTO = unknown>(url: string, resource: DTO): Observable<T> {
+    return this._http.post<T>(url, resource).pipe(take(1));
   }
 
   public update<T, DTO = unknown>(
-    apiPath: string,
+    url: string,
     id: number,
     resource: DTO,
   ): Observable<T> {
-    return this._http
-      .patch<T>(`${apiPath}/${id}`, resource, this.options)
-      .pipe(take(1));
+    return this._http.patch<T>(`${url}/${id}`, resource).pipe(take(1));
   }
 
-  public delete<T = unknown>(apiPath: string, id: number): Observable<T> {
-    return this._http.delete<T>(`${apiPath}/${id}`, this.options).pipe(take(1));
+  public delete<T = unknown>(url: string, id: number): Observable<T> {
+    return this._http.delete<T>(`${url}/${id}`).pipe(take(1));
   }
 
-  public search<T>(apiPath: string): Observable<T> {
-    return this._http.get<T>(`${apiPath}`).pipe(take(1));
+  public search<T>(url: string, params: HttpParams): Observable<T> {
+    return this._http.get<T>(`${url}`, { params }).pipe(take(1));
   }
 }
