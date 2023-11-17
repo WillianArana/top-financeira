@@ -1,95 +1,55 @@
 <p align="center">
   <a href="https://www.chromatic.com/">
-    <img alt="Chromatic" src="https://avatars2.githubusercontent.com/u/24584319?s=200&v=4" width="60" />
+    <img alt="Angular" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-plain.svg" width="68" />
   </a>
 </p>
 
 <h1 align="center">
-  Chromatic's Intro to Storybook Angular template
+  Projeto realizado com Angular e Storybook
 </h1>
 
-This template ships with the main Angular and Storybook configuration files you'll need to get up and running fast.
+Este projeto foi realizado para demonstrar minha capacidade em desenvolver projetos de forma profissional, utilizando meus conhecimentos de anos com o framework Angular.
 
-## 🚅 Quick start
+## 🚅 Início rápido
 
-1.  **Create the application.**
-
-    Use [degit](https://github.com/Rich-Harris/degit) to get this template.
+1.  **Clone o projeto.**
 
     ```shell
-    # Clone the template
-    npx degit chromaui/intro-storybook-angular-template top-financeira
+    git clone git@github.com:WillianArana/top-financeira.git
     ```
 
-1.  **Install the dependencies.**
+1.  **Instalar dependências.**
 
-    Navigate into your new site’s directory and install the necessary dependencies.
+    Navegue até o projeto e instale as dependências necessárias.
 
     ```shell
-    # Navigate to the directory
+    # Indo para o projeto
     cd top-financeira/
 
-    # Install the dependencies
+    # Instalando as dependências.
     npm install
     ```
 
-1.  **Open the source code and start editing!**
+1.  **Abra no seu editor de código preferido para começar!**
 
-    Open the `top-financeira` directory in your code editor of choice and building your first component!
+    Abra o diretório `top-financeira` no editor de código de sua preferência e construa seu primeiro componente!
 
-1.  **Browse your stories!**
+1.  **Executar o projeto.**
 
-    Run `npm run storybook` to see your component's stories at `http://localhost:6006`.
+    Dentro do diretório `top-financeira` execute o comando para subir o projeto.
 
-## 🔎 What's inside?
+    **Com o comando abaixo vai ser possível utilizar o projeto em ambiente de desenvolvimento, e com a biblioteca `json-server` serve para simular toda a parte do back-end.**
 
-A quick look at the top-level files and directories included with this template.
+    ```shell
+    # Para executar o projeto
+    npm start
+    ```
 
-    .
-    ├── .storybook
-    ├── node_modules
-    ├── src
-    ├── .editorconfig
-    ├── .gitignore
-    ├── angular.json
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    ├── tsconfig.app.json
-    ├── tsconfig.json
-    ├── tsconfig.spec.json
-    ├── tslint.json
-    └── README.md
+1.  **Para visualizar as histórias do Storybook**
 
-1.  **`.storybook`**: This directory contains Storybook's [configuration](https://storybook.js.org/docs/react/configure/overview) files.
+    Execute `npm run storybook` para ver as histórias do seu componente em `http://localhost:6006`
 
-2.  **`node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages).
-
-3.  **`src`**: This directory will contain all of the code related to what you will see on your application.
-
-4.  **`.editorconfig`**: This file contains the configurations for [EditorConfig](https://editorconfig.org/).
-
-5.  **`.gitignore`**: This file tells git which files it should not track or maintain during the development process of your project.
-
-6.  **`angular.json`**: This file contains all the configurations required for your Angular project.
-
-7.  **`LICENSE`**: The template is licensed under the MIT licence.
-
-8.  **`package-lock.json`**: This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(Do not change it manually).**
-
-9.  **`package.json`**: Standard manifest file for Node.js projects, which typically includes project specific metadata (such as the project's name, the author among other information). It's based on this file that npm will know which packages are necessary to the project.
-
-10. **`tsconfig.app.json`**: This file contains auxiliary configurations for your Angular project.
-
-11. **`tsconfig.json`**: This file contains configurations the required configurations for TypeScript.
-
-12. **`tsconfig.spec.json`**: This is a TypeScript configuration file aimed for application testing.
-
-## Contribute
-
-If you encounter an issue with the template, we encourage you to open an issue in this template's repository.
-
-## Learning Storybook
+## Storybook
 
 1. Read our introductory tutorial at [Learn Storybook](https://storybook.js.org/tutorials/intro-to-storybook/angular/en/get-started/).
 2. Learn how to transform your component libraries into design systems in our [Design Systems for Developers](https://storybook.js.org/tutorials/design-systems-for-developers/) tutorial.

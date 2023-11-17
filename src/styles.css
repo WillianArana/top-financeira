@@ -7,6 +7,7 @@
 @import "styles/typography.css";
 
 body {
+  overflow-x: hidden;
   background-color: var(--color-neutral-white);
   background: linear-gradient(
       0deg,
@@ -31,9 +32,4 @@ body {
 
 .disable {
   pointer-events: none;
-}
-
-* {
-  /* outline: 1px solid red; */
-  overflow-x: hidden;
 }

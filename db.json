@@ -96,7 +96,7 @@
       "cpf": "49543521425",
       "createdAt": "2023-11-13T03:26:16.074Z",
       "email": "vicente-silva75@uninorte.com.br",
-      "monthlyIncome": 1881,
+      "monthlyIncome": 2000,
       "name": "Vicente Geraldo Rodrigo Silva"
     },
     {
@@ -114,7 +114,8 @@
       "cpf": "89777451601",
       "monthlyIncome": 2354.8,
       "birthDate": "2004-05-27T03:00:00.000Z",
-      "id": 13
+      "id": 13,
+      "createdAt": "2023-11-17T13:48:45.695Z"
     }
   ]
 }
