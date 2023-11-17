@@ -30,10 +30,6 @@ Este projeto foi realizado para demonstrar minha capacidade em desenvolver proje
     npm install
     ```
 
-1.  **Abra no seu editor de código preferido para começar!**
-
-    Abra o diretório `top-financeira` no editor de código de sua preferência e construa seu primeiro componente!
-
 1.  **Executar o projeto.**
 
     Dentro do diretório `top-financeira` execute o comando para subir o projeto.
@@ -47,10 +43,4 @@ Este projeto foi realizado para demonstrar minha capacidade em desenvolver proje
 
 1.  **Para visualizar as histórias do Storybook**
 
-    Execute `npm run storybook` para ver as histórias do seu componente em `http://localhost:6006`
-
-## Storybook
-
-1. Read our introductory tutorial at [Learn Storybook](https://storybook.js.org/tutorials/intro-to-storybook/angular/en/get-started/).
-2. Learn how to transform your component libraries into design systems in our [Design Systems for Developers](https://storybook.js.org/tutorials/design-systems-for-developers/) tutorial.
-3. See our official documentation at [Storybook](https://storybook.js.org/).
+    Execute `npm run storybook` para ver as histórias, dos componentes, do projeto em `http://localhost:6006`
