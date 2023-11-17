@@ -79,7 +79,7 @@
     <tbody>
       <tr
         *ngFor="let customer of customers; trackBy: identify"
-        (dblclick)="navigateToEdit(customer.id)"
+        (dblclick)="navigateToCustomerEdit(customer.id)"
       >
         <td data-label="NOME:" class="table__name" [title]="customer.name">
           {{ customer.name }}
