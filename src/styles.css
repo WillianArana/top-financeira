@@ -28,3 +28,12 @@ body {
   text-transform: uppercase;
   color: var(--color-brand-primary-dark);
 }
+
+.disable {
+  pointer-events: none;
+}
+
+* {
+  /* outline: 1px solid red; */
+  overflow-x: hidden;
+}

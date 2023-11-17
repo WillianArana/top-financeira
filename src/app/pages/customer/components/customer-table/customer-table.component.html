@@ -73,7 +73,7 @@
         >
           RENDA MENSAL
         </th>
-        <th scope="col"></th>
+        <th class="disable" scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -119,7 +119,9 @@
     </tbody>
   </table>
 </div>
+
 <app-pagination
+  class="pagination"
   [data]="pagination"
   (page)="submit({ page: $event })"
 ></app-pagination>

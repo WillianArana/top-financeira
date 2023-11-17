@@ -49,6 +49,10 @@ table.table-sortable {
     & > tr {
       & > th {
         cursor: pointer;
+
+        &:hover {
+          font-weight: 800;
+        }
       }
 
       .asc::after {

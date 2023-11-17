@@ -1,9 +1,6 @@
 .table {
-  margin-left: 18px;
-}
-
-.table-container {
-  min-height: 564px;
+  margin-left: 8px;
+  /* max-width: 1202px; */
 }
 
 .table__action-container {
@@ -123,10 +120,9 @@
 .filter {
   display: flex;
   margin-bottom: 36px;
-  width: 101%;
 
   > form.filter__form {
-    margin-left: 18px;
+    margin-left: 8px;
     width: 100%;
   }
 }
@@ -145,6 +141,10 @@ button.form__button--search {
     filter: invert(64%) sepia(74%) saturate(4428%) hue-rotate(155deg)
       brightness(90%) contrast(89%);
   }
+}
+
+.pagination {
+  margin-top: 22px;
 }
 
 .form__button--registration {

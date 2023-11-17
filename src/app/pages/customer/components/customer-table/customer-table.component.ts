@@ -41,7 +41,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
     },
     createdAt: {
       default: 'desc',
-      order: '',
+      order: 'asc',
     },
     monthlyIncome: {
       default: 'desc',

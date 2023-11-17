@@ -18,6 +18,7 @@
   margin: 0;
   color: var(--color-brand-primary-medium);
   background-color: inherit;
+  overflow: hidden;
 }
 
 .form-group__input-container {
