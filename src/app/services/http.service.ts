@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 
@@ -28,7 +28,12 @@ export class HttpService {
     return this._http.delete<T>(`${url}/${id}`).pipe(take(1));
   }
 
-  public search<T>(url: string, params: HttpParams): Observable<T> {
-    return this._http.get<T>(`${url}`, { params }).pipe(take(1));
+  public search<T>(
+    url: string,
+    params: HttpParams,
+  ): Observable<HttpResponse<T>> {
+    return this._http
+      .get<T>(`${url}`, { params, observe: 'response' })
+      .pipe(take(1));
   }
 }

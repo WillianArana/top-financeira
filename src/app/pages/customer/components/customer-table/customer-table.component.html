@@ -1,34 +1,125 @@
-<table class="table table-sortable paragraph-04">
-  <thead>
-    <tr>
-      <th>NOME</th>
-      <th>CPF</th>
-      <th>DATA CADASTRO</th>
-      <th>RENDA MESAL</th>
-      <th style="width: 8%"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let customer of customers"
-      (dblclick)="navigateToEdit(customer.id)"
+<div class="filter">
+  <form
+    class="filter__form form"
+    [formGroup]="formGroup"
+    (ngSubmit)="onSubmit()"
+  >
+    <app-input
+      class="form__field_name"
+      label="Nome:"
+      formControlName="name"
+    ></app-input>
+
+    <app-input
+      class="form__field_cpf"
+      label="CPF:"
+      formControlName="cpf"
+      appCpfMask
+    ></app-input>
+
+    <app-input
+      class="form__field_birth-date"
+      label="Data Nascimento:"
+      formControlName="birthDate"
+      appDateMask
+    ></app-input>
+
+    <button class="form__button--search">
+      <i class="form__button__icon icon__search--md"></i>
+    </button>
+
+    <app-button
+      class="form__button--registration"
+      (click)="navigateToCustomerRegistration()"
+      type="button"
+      >ADICIONAR CLIENTE</app-button
     >
-      <td>{{ customer.name }}</td>
-      <td>{{ customer.cpf | cpf }}</td>
-      <td>{{ customer.createdAt | date: "dd/MM/yyyy" }}</td>
-      <td>{{ customer.monthlyIncome | number: "1.2-2" }}</td>
-      <td>
-        <div class="table__action-container">
-          <i
-            (click)="remove(customer.id)"
-            class="table__action table__action--remove icon__trash-x--md"
-          ></i>
-          <i
-            (click)="navigateToEdit(customer.id)"
-            class="table__action table__action--edit icon__edit--md"
-          ></i>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  </form>
+</div>
+
+<div class="table-container">
+  <table class="table table-sortable paragraph-04">
+    <thead>
+      <tr>
+        <th
+          scope="col"
+          class="table__name"
+          [ngClass]="sort.name.order"
+          (click)="sortAt('name')"
+        >
+          NOME
+        </th>
+        <th
+          scope="col"
+          class="table__cpf"
+          [ngClass]="sort.cpf.order"
+          (click)="sortAt('cpf')"
+        >
+          CPF
+        </th>
+        <th
+          scope="col"
+          class="table__created-at"
+          [ngClass]="sort.createdAt.order"
+          (click)="sortAt('createdAt')"
+        >
+          DATA CADASTRO
+        </th>
+        <th
+          scope="col"
+          class="table__monthly-income"
+          [ngClass]="sort.monthlyIncome.order"
+          (click)="sortAt('monthlyIncome')"
+        >
+          RENDA MENSAL
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let customer of customers; trackBy: identify"
+        (dblclick)="navigateToEdit(customer.id)"
+      >
+        <td data-label="NOME:" class="table__name" [title]="customer.name">
+          {{ customer.name }}
+        </td>
+        <td data-label="CPF:" class="table__cpf" [title]="customer.cpf">
+          {{ customer.cpf | cpf }}
+        </td>
+        <td
+          data-label="DATA CADASTRO:"
+          class="table__created-at"
+          [title]="customer.createdAt"
+        >
+          {{ customer.createdAt | date: "dd/MM/yyyy" }}
+        </td>
+        <td
+          data-label="RENDA MENSAL:"
+          class="table__monthly-income"
+          [title]="customer.monthlyIncome"
+        >
+          {{ customer.monthlyIncome | number: "1.2-2" }}
+        </td>
+        <td>
+          <div class="table__action-container">
+            <i
+              (click)="remove(customer.id)"
+              class="table__action table__action--remove icon__trash-x--md"
+              title="REMOVER"
+            ></i>
+            <i
+              (click)="navigateToCustomerEdit(customer.id)"
+              class="table__action table__action--edit icon__edit--md"
+              title="EDITAR"
+            ></i>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-pagination
+  [data]="pagination"
+  (page)="submit({ page: $event })"
+></app-pagination>

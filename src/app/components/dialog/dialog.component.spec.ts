@@ -32,20 +32,6 @@ describe('DialogComponent', () => {
     expect(component.dialog).toBeTruthy();
   });
 
-  // describe('onClose', () => {
-  //   it('should be execute on close', () => {
-  //     fixture.detectChanges();
-  //     const dialog = component.dialog;
-  //     const buttonElement = dialog.querySelector(
-  //       '.dialog__form__button--cancel',
-  //     ) as HTMLButtonElement;
-
-  //     buttonElement.click();
-
-  //     expect(dialog.classList.contains('dialog--active')).toBe(false);
-  //   });
-  // });
-
   describe('show', () => {
     it('should be show dialog', () => {
       const spyShowModal = jest.fn();
@@ -81,6 +67,17 @@ describe('DialogComponent', () => {
 
       expect(spyClose).toHaveBeenCalledTimes(1);
       expect(spyServiceConfirm).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('cancel', () => {
+    it('should be cancel dialog', () => {
+      const spyServiceCancel = jest.spyOn(service, 'cancel');
+
+      fixture.detectChanges();
+      component.cancel();
+
+      expect(spyServiceCancel).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -38,7 +38,10 @@ export class DateMaskDirective implements OnInit, AfterContentInit {
 
   public ngOnInit(): void {
     this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {
-      if (isKeyNotNumber(event.key) || !this.isValidLength) {
+      if (
+        event.key !== 'Enter' &&
+        (isKeyNotNumber(event.key) || !this.isValidLength)
+      ) {
         event.preventDefault();
       }
     };
@@ -81,7 +84,7 @@ export class DateMaskDirective implements OnInit, AfterContentInit {
         if (values.length < 3) {
           const lastIndex = values.length - 1;
           values[lastIndex] = `${values[lastIndex]}/`.padStart(3, '0');
-          this.value = values.join('');
+          this.value = values.join('/');
         }
       }
     });

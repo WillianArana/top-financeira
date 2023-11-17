@@ -35,7 +35,7 @@ export class CurrencyMaskDirective implements OnInit, AfterContentInit {
 
   public ngOnInit(): void {
     this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {
-      if (isKeyNotNumber(event.key)) {
+      if (event.key !== 'Enter' && isKeyNotNumber(event.key)) {
         event.preventDefault();
       }
     };

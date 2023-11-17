@@ -1,7 +1,17 @@
+.table {
+  margin-left: 18px;
+}
+
+.table-container {
+  min-height: 564px;
+}
+
 .table__action-container {
   display: flex;
-  gap: 14px;
-  min-width: max-content;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-width: 68px;
 }
 
 .table__action {
@@ -9,21 +19,168 @@
 }
 
 .table__action--remove {
-  filter: invert(27%) sepia(98%) saturate(6090%) hue-rotate(340deg)
-    brightness(92%) contrast(97%);
-}
-
-.table__action--remove:hover {
   filter: invert(18%) sepia(53%) saturate(4423%) hue-rotate(334deg)
     brightness(80%) contrast(104%);
 }
 
+.table__action--remove:hover {
+  filter: invert(27%) sepia(98%) saturate(6090%) hue-rotate(340deg)
+    brightness(92%) contrast(97%);
+}
+
 .table__action--edit {
+  filter: invert(21%) sepia(23%) saturate(2561%) hue-rotate(154deg)
+    brightness(95%) contrast(92%);
+}
+
+.table__action--edit:hover {
   filter: invert(28%) sepia(17%) saturate(5839%) hue-rotate(163deg)
     brightness(103%) contrast(87%);
 }
 
-.table__action--edit:hover {
-  filter: invert(21%) sepia(23%) saturate(2561%) hue-rotate(154deg)
-    brightness(95%) contrast(92%);
+.table__created-at {
+  text-align: center;
+  min-width: 126px;
+}
+
+.table__monthly-income {
+  text-align: right;
+  min-width: 120px;
+}
+
+.table__cpf {
+  min-width: 126px;
+}
+
+@media screen and (max-width: 740px) {
+  .table {
+    margin-left: 0;
+  }
+
+  table {
+    border: 0;
+
+    & > thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    & > tbody > tr {
+      & > td:first-child {
+        border-radius: 0;
+      }
+
+      & > td:last-child {
+        border-radius: 0;
+      }
+
+      &:nth-child(even) > td {
+        background-color: var(--color-neutral-white);
+      }
+    }
+  }
+
+  table td {
+    border: none;
+  }
+
+  table tr {
+    border-bottom: 3px solid var(--color-neutral-light);
+    display: block;
+    margin-bottom: 0.625em;
+    border-radius: none;
+  }
+
+  table td {
+    border-bottom: 1px solid var(--color-neutral-light);
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+  .table__action-container {
+    justify-content: space-evenly;
+  }
+}
+
+.filter {
+  display: flex;
+  margin-bottom: 36px;
+  width: 101%;
+
+  > form.filter__form {
+    margin-left: 18px;
+    width: 100%;
+  }
+}
+
+button.form__button--search {
+  margin: 0;
+  padding: 0;
+  width: 42px;
+  height: 46px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+
+  & > i.form__button__icon {
+    filter: invert(64%) sepia(74%) saturate(4428%) hue-rotate(155deg)
+      brightness(90%) contrast(89%);
+  }
+}
+
+.form__button--registration {
+  margin-left: auto;
+}
+
+.form__field_name {
+  min-width: 266px;
+}
+
+.form__field_cpf {
+  min-width: 126px;
+}
+
+.form__field_birth-date {
+  min-width: 106px;
+}
+
+@media only screen and (max-width: 600px) {
+  .form__button--registration {
+    margin-top: 18px;
+  }
+
+  .form__button--search {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .form__field_name {
+    flex-basis: 100%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .form__field_name {
+    flex-basis: 35%;
+  }
 }

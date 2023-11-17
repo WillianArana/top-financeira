@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subject, switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { DialogService } from 'src/app/components/dialog/dialog.service';
 import { navigateTo } from 'src/app/helper/navigate.helper';
 import { FormService } from 'src/app/services/form.service';
@@ -19,7 +19,6 @@ export class CustomerService {
 
   readonly #apiPath = `${environment.baseUrl}/custormer`;
   readonly #submit$: Observable<CustomerDto>;
-  readonly #remove = new Subject<void>();
 
   constructor(
     private readonly _dialogService: DialogService,

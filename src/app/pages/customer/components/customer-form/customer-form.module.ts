@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'src/app/components/button/button.module';
 import { InputModule } from 'src/app/components/input/input.module';
-import { CpfMaskDirective } from 'src/app/directives/cpf-mask.directive';
-import { CurrencyMaskDirective } from 'src/app/directives/currency-mask.directive';
-import { DateMaskDirective } from 'src/app/directives/date-mask.directive';
+import { DirectivesModule } from 'src/app/directives/directives.module';
 import { CustomerFormComponent } from './customer-form.component';
 
 @NgModule({
@@ -15,13 +13,9 @@ import { CustomerFormComponent } from './customer-form.component';
     ReactiveFormsModule,
     InputModule,
     ButtonModule,
+    DirectivesModule,
   ],
-  declarations: [
-    CustomerFormComponent,
-    CurrencyMaskDirective,
-    CpfMaskDirective,
-    DateMaskDirective,
-  ],
+  declarations: [CustomerFormComponent],
   exports: [CustomerFormComponent],
 })
 export class CustomerFormModule {}

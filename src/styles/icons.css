@@ -58,3 +58,12 @@ i.icon__trash-x--md {
   background-repeat: no-repeat;
   position: initial;
 }
+
+i.icon__search--md {
+  background: url("./../assets/icons/search.svg");
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  position: initial;
+}

@@ -1,5 +1,6 @@
 @import "styles/reset.css";
 @import "styles/colors.css";
+@import "styles/form.css";
 @import "styles/icons.css";
 @import "styles/table.css";
 @import "styles/tooltip.css";
@@ -17,7 +18,7 @@ body {
   height: 100vh;
 }
 
-.heading-page {
+.header-page {
   margin-top: 22px;
   margin-bottom: 22px;
   font-size: 20px;
@@ -26,21 +27,4 @@ body {
   line-height: normal;
   text-transform: uppercase;
   color: var(--color-brand-primary-dark);
-}
-
-form.form {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: stretch;
-  flex-flow: row wrap;
-  align-items: stretch;
-  gap: 10px 10px;
-}
-
-@media only screen and (max-width: 600px) {
-  form.form {
-    flex-direction: column;
-    width: 100%;
-  }
 }

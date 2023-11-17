@@ -42,4 +42,8 @@ export class DialogComponent implements AfterViewInit {
     this._dialogService.confirm();
     this.dialog.close();
   }
+
+  public cancel(): void {
+    this._dialogService.cancel();
+  }
 }

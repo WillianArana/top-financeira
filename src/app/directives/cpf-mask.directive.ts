@@ -33,12 +33,15 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
   }
 
   get isValidLength() {
-    return this.value?.length < 15;
+    return this.value?.length < 14;
   }
 
   public ngOnInit(): void {
     this._elementRef.nativeElement.onkeypress = (event: KeyboardEvent) => {
-      if (isKeyNotNumber(event.key) || !this.isValidLength) {
+      if (
+        event.key !== 'Enter' &&
+        (isKeyNotNumber(event.key) || !this.isValidLength)
+      ) {
         event.preventDefault();
       }
     };
@@ -75,7 +78,7 @@ export class CpfMaskDirective implements OnInit, AfterContentInit {
         const lastIndex = values.length - 1;
         if (values.length < 3 && /^\d{3}$/.test(values[lastIndex])) {
           values[lastIndex] = `${values[lastIndex]}.`;
-          this.value = values.join('');
+          this.value = values.join('.');
         }
       }
     });

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { DialogComponent } from './dialog.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DialogService {
-  readonly #confirm$ = new Subject<void>();
+  readonly #confirm = new Subject<void>();
+  readonly #cancel = new Subject<void>();
   readonly #types = {
     success: {
       'icon__check-circle--md': true,
@@ -22,13 +23,19 @@ export class DialogService {
     },
   };
 
+  cancel$ = this.#cancel.asObservable();
+
   #dialog!: DialogComponent;
   public setDialog(dialog: DialogComponent): void {
     this.#dialog = dialog;
   }
 
   public confirm(): void {
-    this.#confirm$.next();
+    this.#confirm.next();
+  }
+
+  public cancel(): void {
+    this.#cancel.next();
   }
 
   public showPositiveFeedback(data: {
@@ -58,7 +65,7 @@ export class DialogService {
     dialog.type = data.type;
     dialog.showButtonCancel = false;
     dialog.show();
-    return this.#confirm$.asObservable();
+    return this.#confirm.asObservable();
   }
 
   public showQuestion(data: {
@@ -73,6 +80,6 @@ export class DialogService {
     dialog.type = this.#types.warning;
     dialog.showButtonCancel = true;
     dialog.show();
-    return this.#confirm$.asObservable();
+    return this.#confirm.asObservable().pipe(takeUntil(this.cancel$));
   }
 }

@@ -2,7 +2,7 @@ table.table {
   border-spacing: 0;
   border-collapse: separate;
   width: calc(100% - 10px);
-  margin-left: 18px;
+
   color: var(--color-neutral-dark);
   text-align: left;
 
@@ -51,12 +51,12 @@ table.table-sortable {
         cursor: pointer;
       }
 
-      .th-sort-asc::after {
+      .asc::after {
         content: " \25b4";
         font-size: 14px;
       }
 
-      .th-sort-desc::after {
+      .desc::after {
         content: " \25be";
         font-size: 14px;
       }

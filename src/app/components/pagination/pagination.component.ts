@@ -11,20 +11,27 @@ type Pagination = {
 })
 export class PaginationComponent {
   current = 1;
+  last = 1;
 
   @Output() page = new EventEmitter<number>();
   @Input() set data(v: Pagination) {
-    const current = this.current;
-    const items = [];
-    for (let i = 1; i <= v.last; i++) {
-      items.push({
-        value: i,
-        current: i === current,
-      });
+    if (v) {
+      if (v.last < this.last) {
+        this.current = Math.max(this.current - 1, 1);
+      }
+      this.last = v.last;
+      const current = this.current;
+      const items = [];
+      for (let i = 1; i <= v.last; i++) {
+        items.push({
+          value: i,
+          current: i === current,
+        });
+      }
+      this.isFirst = !!items[0]?.current;
+      this.isLast = !!items[items.length - 1]?.current;
+      this.items = items;
     }
-    this.isFirst = items[0].current;
-    this.isLast = items[items.length - 1].current;
-    this.items = items;
   }
 
   items: {
@@ -41,8 +48,10 @@ export class PaginationComponent {
 
   public emit(page: number): void {
     this.current = page;
-    const last = this.items[this.items.length - 1].value;
-    this.data = { last };
+    if (this.items.length) {
+      const last = this.items[this.items.length - 1].value;
+      this.data = { last };
+    }
     this.page.emit(page);
   }
 
@@ -50,25 +59,3 @@ export class PaginationComponent {
     this.emit(this.current - 1);
   }
 }
-
-/*
-
-<http://localhost:3000/custormer?_page=1&_limit=4&_sort=birthDate&_order=asc>; rel="first",
-<http://localhost:3000/custormer?_page=2&_limit=4&_sort=birthDate&_order=asc>; rel="next",
-<http://localhost:3000/custormer?_page=3&_limit=4&_sort=birthDate&_order=asc>; rel="last"
-*/
-
-/*
-<http://localhost:3000/custormer?_page=1&_limit=4&_sort=birthDate&_order=asc>; rel="first",
-<http://localhost:3000/custormer?_page=2&_limit=4&_sort=birthDate&_order=asc>; rel="prev",
- <http://localhost:3000/custormer?_page=3&_limit=4&_sort=birthDate&_order=asc>; rel="last"
-*/
-
-/*
-
-{
-    next: 2,
-    last: 1,
-  };
-
-  */

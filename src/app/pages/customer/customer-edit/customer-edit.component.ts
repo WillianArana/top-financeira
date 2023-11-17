@@ -14,7 +14,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   readonly #subscripton = new Subscription();
 
   #customerId = 0;
-
   showForm = true;
 
   constructor(
