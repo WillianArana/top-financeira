@@ -16,23 +16,23 @@
 }
 
 .table__action--remove {
-  filter: invert(18%) sepia(53%) saturate(4423%) hue-rotate(334deg)
-    brightness(80%) contrast(104%);
-}
-
-.table__action--remove:hover {
   filter: invert(27%) sepia(98%) saturate(6090%) hue-rotate(340deg)
     brightness(92%) contrast(97%);
 }
 
+.table__action--remove:hover {
+  filter: invert(18%) sepia(53%) saturate(4423%) hue-rotate(334deg)
+    brightness(80%) contrast(104%);
+}
+
 .table__action--edit {
-  filter: invert(21%) sepia(23%) saturate(2561%) hue-rotate(154deg)
-    brightness(95%) contrast(92%);
+  filter: invert(28%) sepia(17%) saturate(5839%) hue-rotate(163deg)
+    brightness(103%) contrast(87%);
 }
 
 .table__action--edit:hover {
-  filter: invert(28%) sepia(17%) saturate(5839%) hue-rotate(163deg)
-    brightness(103%) contrast(87%);
+  filter: invert(21%) sepia(23%) saturate(2561%) hue-rotate(154deg)
+    brightness(95%) contrast(92%);
 }
 
 .table__created-at {
@@ -136,10 +136,16 @@ button.form__button--search {
   align-content: center;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   & > i.form__button__icon {
-    filter: invert(64%) sepia(74%) saturate(4428%) hue-rotate(155deg)
-      brightness(90%) contrast(89%);
+    filter: invert(28%) sepia(17%) saturate(5839%) hue-rotate(163deg)
+      brightness(103%) contrast(87%);
+
+    &:hover {
+      filter: invert(21%) sepia(23%) saturate(2561%) hue-rotate(154deg)
+        brightness(95%) contrast(92%);
+    }
   }
 }
 
