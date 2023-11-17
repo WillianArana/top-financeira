@@ -130,6 +130,10 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
         }
       });
 
+      this.pagination = {
+        last: 1,
+      };
+
       this.submit({ page: 1 });
     }
   }
