@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { IForm } from 'src/app/interfaces/form.interface';
+import { FormService } from 'src/app/services/form.service';
 import { FormValidations } from '../../../../form.validation';
 import { CustomerService } from '../../customer.service';
 import { CustomerDto } from '../../models/customer.dto';
@@ -9,20 +11,37 @@ import { CustomerDto } from '../../models/customer.dto';
   selector: 'app-customer-form',
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.css'],
+  providers: [FormService],
 })
-export class CustomerFormComponent implements OnInit, IForm {
+export class CustomerFormComponent implements OnInit, OnDestroy, IForm {
+  readonly #subscripton = new Subscription();
+
+  #id = 0;
+  isRemoveButtoDisable = true;
+
   formGroup!: FormGroup;
 
-  @Input() removeDisabled = true;
-  @Output() remove = new EventEmitter<true>();
+  @Input() set id(value: number) {
+    this.#id = value;
+    this.isRemoveButtoDisable = !(value > 0);
+  }
 
   constructor(
     private readonly _customerService: CustomerService,
+    private readonly _formService: FormService<CustomerDto>,
     private readonly _formBuilder: FormBuilder,
   ) {}
 
   public ngOnInit(): void {
+    this.setOnSubmit();
     this.buildFormGroup();
+  }
+
+  private setOnSubmit(): void {
+    const sub = this._formService.submit$.subscribe((data) =>
+      this._customerService.submit(data),
+    );
+    this.#subscripton.add(sub);
   }
 
   private buildFormGroup(): void {
@@ -46,7 +65,7 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   public onSubmit(): void {
-    this._customerService.formGroupSubmit(
+    this._formService.formGroupSubmit(
       this.formGroup,
       () => new CustomerDto(this.formGroup.value),
     );
@@ -57,6 +76,13 @@ export class CustomerFormComponent implements OnInit, IForm {
   }
 
   public onRemove(): void {
-    this.remove.emit(true);
+    const sub = this._customerService.remove(this.#id).subscribe(() => {
+      this._customerService.navigateToBack();
+    });
+    this.#subscripton.add(sub);
+  }
+
+  public ngOnDestroy(): void {
+    this.#subscripton.unsubscribe();
   }
 }

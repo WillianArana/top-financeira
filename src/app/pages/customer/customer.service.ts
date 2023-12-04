@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, Subject, switchMap, tap } from 'rxjs';
 import { DialogService } from 'src/app/components/dialog/dialog.service';
 import { navigateTo } from 'src/app/helper/navigate.helper';
-import { FormService } from 'src/app/services/form.service';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment.prod';
 import { CustomerDataForm } from './models/customer.data-form';
@@ -18,16 +16,13 @@ export class CustomerService {
   #dataForm = new CustomerDataForm();
 
   readonly #apiPath = `${environment.baseUrl}/custormer`;
-  readonly #submit$: Observable<CustomerDto>;
+  readonly #submit$ = new Subject<CustomerDto>();
 
   constructor(
     private readonly _dialogService: DialogService,
-    private readonly _formService: FormService<CustomerDto>,
     private readonly _httpServer: HttpService,
     private readonly _router: Router,
-  ) {
-    this.#submit$ = this._formService.submit$;
-  }
+  ) {}
 
   get apiPath() {
     return this.#apiPath;
@@ -41,12 +36,12 @@ export class CustomerService {
     this.clearForm();
   }
 
-  public clearForm(): void {
-    this.#dataForm = new CustomerDataForm();
+  public submit(dto: CustomerDto): void {
+    this.#submit$.next(dto);
   }
 
-  public formGroupSubmit(form: FormGroup, createDtoFn: () => CustomerDto) {
-    this._formService.formGroupSubmit(form, createDtoFn);
+  public clearForm(): void {
+    this.#dataForm = new CustomerDataForm();
   }
 
   public getById(id: number | string): Observable<ICustomer> {

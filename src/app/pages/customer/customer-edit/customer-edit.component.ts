@@ -13,7 +13,7 @@ import { CustomerDataForm } from '../models/customer.data-form';
 export class CustomerEditComponent implements OnInit, OnDestroy {
   readonly #subscripton = new Subscription();
 
-  #customerId = 0;
+  customerId = 0;
   showForm = true;
 
   constructor(
@@ -32,7 +32,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         );
         this.setUpdate(customerId);
         this.reloadForm();
-        this.#customerId = customerId;
+        this.customerId = customerId;
       },
       error: (error) => {
         if (error.status === 404) {
@@ -52,13 +52,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
   private setUpdate(id: number): void {
     const sub = this._customerService.onUpdate(id).subscribe();
-    this.#subscripton.add(sub);
-  }
-
-  remove(): void {
-    const sub = this._customerService.remove(this.#customerId).subscribe(() => {
-      this._customerService.navigateToBack();
-    });
     this.#subscripton.add(sub);
   }
 

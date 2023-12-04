@@ -1,7 +1,3 @@
 <h1 class="header-page">Cliente</h1>
 
-<app-customer-form
-  *ngIf="showForm"
-  [removeDisabled]="false"
-  (remove)="remove()"
-></app-customer-form>
+<app-customer-form *ngIf="showForm" [id]="customerId"></app-customer-form>
